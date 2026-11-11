@@ -39,7 +39,7 @@
   const vid = $('.film-vid'), intro = $('.film-intro');
   const chaps = $$('.chap'), railSpans = $$('.film-rail span'), rail = $('.film-rail');
   const small = matchMedia('(max-width: 760px)').matches;
-  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=eae9238c`;
+  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=ba077d85`;
   let ready = false, shown = 0, seeking = false;
   vid.addEventListener('loadeddata', () => { ready = true; vid.classList.add('ready'); });
   vid.addEventListener('seeked', () => { seeking = false; });
@@ -54,10 +54,11 @@
     if (k >= 1) { cover.style.display = 'none'; hint.style.opacity = 0; return; }
     cover.style.display = '';
     const vw = innerWidth, vh = innerHeight;
-    const s0 = Math.min(vw * (vw < 760 ? .78 : .5), vh * .56 * 192 / 186) / 192;
+    const s0 = Math.min(vw * (vw < 760 ? .72 : vw < 1080 ? .38 : .4), vh * (vw < 760 ? .42 : .56) * 192 / 186) / 192;
     const e = ease(clamp(k / .9, 0, 1));
     const s = s0 * Math.pow(90, e);
-    const p0x = vw / 2 + (O.x - GC.x) * s0, p0y = vh / 2 + (O.y - GC.y) * s0;
+    const cx0 = vw >= 760 ? vw * (vw >= 1080 ? .36 : .3) : vw / 2, cy0 = vw < 760 ? vh * .36 : vh / 2;
+    const p0x = cx0 + (O.x - GC.x) * s0, p0y = cy0 + (O.y - GC.y) * s0;
     const px = lerp(p0x, vw / 2, e), py = lerp(p0y, vh * .5, e);
     const tf = `translate(${px.toFixed(2)} ${py.toFixed(2)}) scale(${s.toFixed(4)}) translate(${-O.x} ${-O.y})`;
     coverGs.forEach(g => g.setAttribute('transform', tf));
@@ -67,10 +68,12 @@
   }
   addEventListener('resize', () => { lastCover = -1; });
 
+  const coverForm = $('.cover-form');
   let lastBeat = 99, lastCover = -1;
   function heroTick() {
     const st = filmState();
     if (st.cover !== lastCover) { drawCover(st.cover); lastCover = st.cover; }
+    coverForm.classList.toggle('gone', !(st.beat === -2 && st.cover < .025) || scrollY > film.offsetHeight);
     const introOn = st.beat === -1 || (st.beat === -2 && st.cover > .8);
     intro.style.opacity = introOn ? 1 : 0;
     intro.style.transform = introOn ? 'none' : 'translateY(18px)';
@@ -100,60 +103,62 @@
   }
   window.__film = { filmState, segs, totalW };
 
-  /* ================= BUILD: tear it off, put it back ================= */
-  const build = $('.build'), layers = $$('.ly'), items = $$('.build-list li'), status = $('.build-status');
-  const finalFig = $('.build-final'), slab = $('.slab'), meter = $('.build-meter');
-  const NAMES = ['Roof deck', 'Ice & water shield', 'Synthetic underlayment', 'Drip edge', 'Starter course', 'Architectural shingles', 'Ridge vent & cap'];
-  const TEAR = { a: .06, step: .036, dur: .05 };          // layers 7→2 lift off
-  const REB = { deck: .31, a: .37, step: .072, dur: .055 }; // layers 2→7 drop back on
-  const EXP = { a: .8, b: .85, c: .885, d: .92 };          // spread into an exploded stack, then close
-  const FIN = .925;
-  let lastStatus = '';
-  function buildTick() {
-    const r = build.getBoundingClientRect();
+  /* ================= LAYERS: the roof lifts apart (scroll-scrubbed) ================= */
+  const lay = $('.layers'), lvid = $('.lc-vid'), lItems = $$('.lay-list li'), lPins = $('.lc-pins'), lPinEls = $$('.lc-pins span');
+  lvid.src = `assets/video/${small ? 'layers-m' : 'layers-d'}.mp4?v=1`;
+  let lReady = false, lShown = 0, lSeek = false;
+  lvid.addEventListener('loadeddata', () => { lReady = true; lvid.classList.add('ready'); });
+  lvid.addEventListener('seeked', () => { lSeek = false; });
+  // seconds in the clip where each layer is the one lifting
+  const LDUR = 6.96, LWIN = [[.7, 1.65], [1.65, 2.45], [2.45, 3.25], [3.25, 3.95], [3.95, 4.65], [4.65, 99]];
+  let lLast = -2;
+  function layersTick() {
+    const r = lay.getBoundingClientRect();
     if (r.bottom < 0 || r.top > innerHeight) return;
-    const p = prog(build);
-    let active = 0, head = 'Finished roof', sub = 'Scroll to take it apart';
-    layers.forEach((ly, i) => {
-      const k = i + 1;
-      let lift = 0, op = 1;
-      if (k > 1) {
-        const ts = TEAR.a + (7 - k) * TEAR.step;
-        const tf = easeOut(clamp((p - ts) / TEAR.dur, 0, 1));
-        const rs = REB.a + (k - 2) * REB.step;
-        const rf = easeOut(clamp((p - rs) / REB.dur, 0, 1));
-        if (p < rs) { lift = tf * 560; op = 1 - tf; }
-        else { lift = (1 - rf) * 460; op = rf; }
-      }
-      const ex = ease(clamp((p - EXP.a) / (EXP.b - EXP.a), 0, 1)) * (1 - ease(clamp((p - EXP.c) / (EXP.d - EXP.c), 0, 1)));
-      lift += ex * (k - 1) * (innerWidth < 760 ? 26 : 52);
-      ly.style.transform = `translateZ(calc(var(--z) + ${lift.toFixed(1)}px))`;
-      ly.style.opacity = op.toFixed(3);
-    });
-    if (p >= TEAR.a && p < REB.deck) {
-      const i = Math.min(5, Math.floor((p - TEAR.a) / TEAR.step));
-      active = 7 - i; head = 'Tear-off'; sub = `Off comes the ${NAMES[active - 1].toLowerCase()}`;
-      if (p > TEAR.a + 5 * TEAR.step + TEAR.dur) { head = 'Down to the deck'; sub = 'Inspected bare. Soft spots replaced.'; active = 1; }
-    } else if (p >= REB.deck && p < REB.a) { active = 1; head = 'Down to the deck'; sub = 'Inspected bare. Soft spots replaced.'; }
-    else if (p >= REB.a && p < EXP.a) {
-      active = Math.min(5, Math.floor((p - REB.a) / REB.step)) + 2;
-      head = `Rebuild: ${String(active).padStart(2, '0')} of 07`; sub = NAMES[active - 1];
+    const p = prog(lay);
+    const t = clamp((p - .06) / .74, 0, 1) * LDUR;
+    lShown += (t - lShown) * (reduce || window.__instant ? 1 : 0.16);
+    if (Math.abs(t - lShown) < .004) lShown = t;
+    if (lReady && !lSeek && !window.__instant && Math.abs(lvid.currentTime - lShown) > 1 / 96) {
+      lSeek = true; lvid.currentTime = lShown; setTimeout(() => { lSeek = false; }, 120);
     }
-    if (p >= EXP.a - .005 && p < FIN) { active = 0; head = 'All seven, in order'; sub = 'Deck at the bottom, ridge cap on top'; }
-    if (p >= FIN) { head = 'Finished'; sub = 'All seven layers. One to two days for most homes.'; }
-    const key = head + sub;
-    if (key !== lastStatus) { status.innerHTML = `<b>${head}</b><span>${sub}</span>`; lastStatus = key; }
-    items.forEach((li, i) => {
-      const k = i + 1;
-      li.classList.toggle('on', k === active);
-      li.classList.toggle('done', (p >= REB.a && k < active) || p >= EXP.a - .005);
-    });
-    layers.forEach((ly, i) => ly.classList.toggle('on', i + 1 === active && p >= REB.deck && p < FIN));
-    const fin = clamp((p - FIN) / .05, 0, 1);
-    finalFig.style.opacity = fin;
-    slab.style.opacity = 1 - fin;
-    meter.style.setProperty('--p', p.toFixed(4));
+    let act = -1;
+    LWIN.forEach(([a, b], i) => { if (lShown >= a && lShown < b) act = i; });
+    if (p > .86) act = -1;
+    if (act !== lLast) {
+      lItems.forEach((li, i) => { li.classList.toggle('on', i === act); li.classList.toggle('seen', lShown >= LWIN[i][0] - .01); });
+      lPinEls.forEach((s, i) => s.classList.toggle('on', i === act));
+      lLast = act;
+    }
+    if (p > .86) lItems.forEach(li => li.classList.add('seen'));
+    lPins.classList.toggle('show', lShown > LDUR - .5);
   }
+  window.__layers = { vid: lvid, state: () => ({ t: lShown, p: prog(lay) }) };
+  // once the stack has settled, hovering a pin or a list item highlights that layer
+  const pinOn = i => { lItems.forEach((li, j) => li.classList.toggle('on', j === i)); lPinEls.forEach((s, j) => s.classList.toggle('on', j === i)); };
+  lPinEls.forEach((s, i) => s.addEventListener('mouseenter', () => prog(lay) > .86 && pinOn(i)));
+  lItems.forEach((li, i) => li.addEventListener('mouseenter', () => prog(lay) > .86 && pinOn(i)));
+
+  /* ================= PICK YOUR ROOF ================= */
+  const ROOFS = {
+    charcoal: { name: 'Charcoal', sys: 'Architectural laminated shingle', war: '30-yr manufacturer + lifetime labor', for: 'Most homes, best value per square foot' },
+    wood: { name: 'Weathered wood', sys: 'Architectural laminated shingle', war: '30-yr manufacturer + lifetime labor', for: 'Warm brick and stone exteriors' },
+    'black-metal': { name: 'Matte black', sys: 'Standing seam metal', war: 'Manufacturer warranty + lifetime labor', for: 'Modern looks and commercial buildings' },
+    galv: { name: 'Galvalume', sys: 'Standing seam metal', war: 'Manufacturer warranty + lifetime labor', for: 'Shops, barns and commercial roofs' },
+  };
+  const pickImgs = $$('.pick-imgs img'), sws = $$('.sw'), tabs = $$('.pick-tabs button'), swGroups = $$('.pick-sw');
+  const pickSet = k => {
+    pickImgs.forEach(im => im.classList.toggle('on', im.dataset.k === k));
+    sws.forEach(b => b.classList.toggle('on', b.dataset.k === k));
+    Object.entries(ROOFS[k]).forEach(([f, v]) => { const el = $(`.pick-spec [data-f="${f}"]`); if (el) el.textContent = v; });
+  };
+  if (small) pickImgs.forEach(im => { im.src = im.getAttribute('src').replace('.webp', '-m.webp'); });
+  sws.forEach(b => b.addEventListener('click', () => pickSet(b.dataset.k)));
+  tabs.forEach(t => t.addEventListener('click', () => {
+    tabs.forEach(o => o.setAttribute('aria-selected', o === t));
+    swGroups.forEach(g => { g.hidden = g.dataset.type !== t.dataset.type; });
+    pickSet(t.dataset.type === 'metal' ? 'black-metal' : 'charcoal');
+  }));
 
   /* ================= REEL: SUMMIT wordmark over drone footage ================= */
   const reel = $('.reel'), reelVid = $('.reel-vid'), reelWord = $('.reel-word'), reelFill = $('.reel-fill'), reelCopy = $('.reel-copy');
@@ -167,7 +172,11 @@
   function reelTick() {
     const r = reel.getBoundingClientRect();
     if (r.bottom < 0 || r.top > innerHeight) { if (!reelVid.paused) reelVid.pause(); return; }
-    if (reelVid.paused) { reelVid.preload = 'auto'; reelVid.play().catch(() => {}); }
+    if (window.__recT != null) {          // frame-stepped recording: drive the reel by the recorder's clock
+      reelVid.preload = 'auto'; if (!reelVid.paused) reelVid.pause();
+      const want = window.__recT % (reelVid.duration || 26);
+      if (reelVid.readyState >= 1 && Math.abs(reelVid.currentTime - want) > .02) { reelVid.dataset.recSeek = '1'; reelVid.currentTime = want; }
+    } else if (reelVid.paused) { reelVid.preload = 'auto'; reelVid.play().catch(() => {}); }
     const q = prog(reel);
     const z = ease(clamp((q - .12) / .5, 0, 1));
     const s = 1 + z * 2.4, cx = innerWidth / 2, cy = innerHeight / 2;
@@ -191,9 +200,9 @@
   }
 
   /* ================= loop ================= */
-  function tick() { heroTick(); buildTick(); reelTick(); workTick(); requestAnimationFrame(tick); }
+  function tick() { heroTick(); layersTick(); reelTick(); workTick(); requestAnimationFrame(tick); }
   requestAnimationFrame(tick);
-  window.__tick = () => { heroTick(); buildTick(); reelTick(); workTick(); };
+  window.__tick = () => { heroTick(); layersTick(); reelTick(); workTick(); };
 
   /* ================= map ================= */
   async function drawMap() {
@@ -253,38 +262,34 @@
     els.forEach((e, i) => setTimeout(() => { e.classList.add('drawn'); countEl.textContent = i + 1; if (i === els.length - 1) report.classList.add('done'); }, reduce ? 0 : 220 + i * 120));
   }, { threshold: .45 }).observe(report);
 
-  /* ================= services index ================= */
-  const svcFig = $('.svc-fig img'), svcItems = $$('.svc-list li');
-  svcItems.forEach(li => {
-    const on = () => {
-      svcItems.forEach(x => x.classList.toggle('is-on', x === li));
-      if (svcFig && svcFig.getAttribute('src') !== li.dataset.img) {
-        svcFig.style.opacity = 0;
-        const im = new Image(); im.src = li.dataset.img;
-        im.onload = () => { svcFig.src = li.dataset.img; svcFig.style.opacity = 1; };
-      }
-    };
-    li.addEventListener('mouseenter', on); li.addEventListener('focusin', on);
+  /* ================= services: expanding panels ================= */
+  const pns = $$('.pn');
+  pns.forEach(pn => {
+    const on = () => pns.forEach(o => o.classList.toggle('on', o === pn));
+    pn.addEventListener('mouseenter', on); pn.addEventListener('focusin', on);
+    pn.addEventListener('click', e => { if (!pn.classList.contains('on')) { e.preventDefault(); on(); } });
   });
 
-  /* ================= testimonial videos: one at a time ================= */
-  const rvs = $$('.rv video');
-  rvs.forEach(v => v.addEventListener('play', () => rvs.forEach(o => o !== v && o.pause())));
+  /* ================= testimonials: featured player + thumbnails ================= */
+  const rvMain = $('.rv-main video'), rvts = $$('.rvt');
+  rvts.forEach(b => b.addEventListener('click', () => {
+    rvts.forEach(o => o.classList.toggle('on', o === b));
+    rvMain.pause(); rvMain.poster = b.dataset.poster; rvMain.src = b.dataset.src; rvMain.play().catch(() => {});
+  }));
 
   /* ================= booking form (concept: no submission) ================= */
-  const form = $('#bookForm');
-  form.addEventListener('submit', e => {
+  $$('#bookForm, .cf').forEach(form => form.addEventListener('submit', e => {
     e.preventDefault();
     let ok = true;
     $$('input[required]', form).forEach(i => { const bad = !i.value.trim(); i.classList.toggle('bad', bad); if (bad && ok) { i.focus(); ok = false; } });
     if (!ok) return;
-    $('.form-done', form).hidden = false;
+    $('.form-done, .cf-done', form).hidden = false;
     $('button[type=submit]', form).disabled = true;
-  });
+  }));
 
   /* ================= reveals ================= */
   if (!reduce) {
-    const els = $$('.proof .h-xl, .territory .h-xl, .services .h-xl, .reviews .h-xl, .process .h-xl, .book .h-xl, .lede, .pair, .proc-track li, .rv, .rev-quotes blockquote, .terr-offices div, .plate-list li');
+    const els = $$('.proof .h-xl, .territory .h-xl, .services .h-xl, .reviews .h-xl, .book .h-xl, .lede, .pair, .std-steps li, .std-facts li, .rev-more blockquote, .terr-offices div');
     els.forEach((el, i) => { el.classList.add('rv-in'); el.style.transitionDelay = `${(i % 4) * 70}ms`; });
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
     els.forEach(el => io.observe(el));

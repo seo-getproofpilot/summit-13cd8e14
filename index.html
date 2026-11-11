@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Michroma&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=eae9238c">
+<link rel="stylesheet" href="assets/site.css?v=ba077d85">
 <link rel="preload" as="image" href="assets/img/frame-storm.webp">
 </head>
 <body>
@@ -30,10 +30,10 @@
   </a>
   <nav class="nav-links" aria-label="Primary">
     <a href="#system">The roof</a>
+    <a href="#pick">Pick your roof</a>
     <a href="#proof">Inspections</a>
     <a href="#work">Our work</a>
-    <a href="#territory">Where we work</a>
-    <a href="#reviews">Reviews</a>
+        <a href="#reviews">Reviews</a>
   </nav>
   <div class="nav-cta">
     <a class="nav-phone" href="tel:+19723333365"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>(972) 333-3365</a>
@@ -72,6 +72,18 @@
       </g>
     </svg>
     <p class="cover-hint" aria-hidden="true">Scroll to watch the job</p>
+    <aside class="cover-form" aria-label="Request a free inspection">
+      <p class="cf-k">Free roof inspection</p>
+      <p class="cf-h">Storm hit your roof?</p>
+      <form class="cf" novalidate>
+        <label><span>Name</span><input name="name" autocomplete="name" required></label>
+        <label><span>Phone</span><input name="phone" type="tel" autocomplete="tel" required></label>
+        <label class="cf-wide"><span>Property address</span><input name="address" autocomplete="street-address" required></label>
+        <button class="btn btn-hot cf-wide" type="submit">Book my free inspection</button>
+        <p class="cf-done" role="status" hidden>Got it. Summit will call you to set a time.</p>
+      </form>
+      <p class="cf-foot"><a href="tel:+19723333365">(972) 333-3365</a><span>5.0 on Google · BBB A+</span></p>
+    </aside>
 
     <div class="film-intro">
       <p class="eyebrow">Texas · Oklahoma · South Florida</p>
@@ -105,42 +117,69 @@
   </div>
 </section>
 
-<!-- ============ BUILD: the roof, layer by layer ============ -->
-<section class="build" id="system" aria-label="The layers of a roof, taken off and rebuilt">
-  <div class="build-stage">
-    <div class="build-copy">
-      <p class="eyebrow">The roof, layer by layer</p>
-      <h2 class="build-h">Seven layers between your attic and the next hailstorm.</h2>
-      <p class="build-status" aria-live="polite"><b>Finished roof</b><span>Scroll to take it apart</span></p>
-      <ol class="build-list">
-        <li data-k="1"><span class="bl-n">01</span><div><h3>Roof deck</h3><p>The plywood everything nails to. We see it bare on every tear-off, so soft spots get replaced, not buried.</p></div></li>
-        <li data-k="2"><span class="bl-n">02</span><div><h3>Ice &amp; water shield</h3><p>Self-sealing membrane along the eaves and in valleys, where leaks start.</p></div></li>
-        <li data-k="3"><span class="bl-n">03</span><div><h3>Synthetic underlayment</h3><p>The water barrier under everything. If a shingle ever lets go, this keeps you dry.</p></div></li>
-        <li data-k="4"><span class="bl-n">04</span><div><h3>Drip edge</h3><p>Metal flashing on every eave and rake that turns water into the gutter, not your fascia.</p></div></li>
-        <li data-k="5"><span class="bl-n">05</span><div><h3>Starter course</h3><p>A sealed first row at the edge, where wind tries to lift a roof first.</p></div></li>
-        <li data-k="6"><span class="bl-n">06</span><div><h3>Architectural shingles</h3><p>Laminated and heavier than 3-tab. IKO and TAMKO, installed by a crew certified by both.</p></div></li>
-        <li data-k="7"><span class="bl-n">07</span><div><h3>Ridge vent &amp; cap</h3><p>Lets attic heat out along the peak, so shingles don't cook from underneath in August.</p></div></li>
+<!-- ============ LAYERS: the real roof, lifted apart ============ -->
+<section class="layers" id="system" aria-label="Every layer of a Summit roof">
+  <div class="layers-stage">
+    <div class="layers-copy">
+      <p class="eyebrow eyebrow-dark">What's under a roof</p>
+      <h2 class="layers-h">Every layer between your attic and the next hailstorm.</h2>
+      <p class="layers-lede">Most homeowners only ever see the shingles. Scroll and the roof comes apart, top to bottom, so you can see what each layer does.</p>
+      <ol class="lay-list">
+        <li data-i="0"><i></i><div><h3>Ridge cap &amp; vent</h3><p>Lets attic heat out along the peak, so shingles don't cook from underneath in August.</p></div></li>
+        <li data-i="1"><i></i><div><h3>Architectural shingles</h3><p>Laminated and heavier than 3-tab, sealed on a starter row at every edge. IKO and TAMKO, by a crew certified for both.</p></div></li>
+        <li data-i="2"><i></i><div><h3>Synthetic underlayment</h3><p>The water barrier over the whole deck. If a shingle ever lets go, this keeps you dry.</p></div></li>
+        <li data-i="3"><i></i><div><h3>Ice &amp; water shield</h3><p>Self-sealing membrane at the eaves, valleys and around every penetration, with metal drip edge on top.</p></div></li>
+        <li data-i="4"><i></i><div><h3>Roof decking</h3><p>The plywood everything nails to. We see it bare on every tear-off, so soft spots get replaced, not buried.</p></div></li>
+        <li data-i="5"><i></i><div><h3>Trusses</h3><p>The frame of the house. Checked for damage before a single sheet goes back on.</p></div></li>
       </ol>
     </div>
-    <div class="build-scene" aria-hidden="true">
-      <div class="build-floor"></div>
-      <div class="slab">
-        <div class="ly ly-1"><i class="edge"></i></div>
-        <div class="ly ly-2"></div>
-        <div class="ly ly-3"></div>
-        <div class="ly ly-4"><i class="rake"></i></div>
-        <div class="ly ly-5"></div>
-        <div class="ly ly-6"><i class="edge"></i></div>
-        <div class="ly ly-7"></div>
+    <figure class="layers-card">
+      <img class="lc-poster" src="assets/img/layers-a.webp" alt="" aria-hidden="true">
+      <video class="lc-vid" muted playsinline preload="auto" aria-hidden="true"></video>
+      <div class="lc-pins" aria-hidden="true">
+        <span style="--x:62%;--y:8.5%" data-i="0">1</span><span style="--x:79%;--y:22%" data-i="1">2</span><span style="--x:80%;--y:30.5%" data-i="2">3</span><span style="--x:80%;--y:38%" data-i="3">4</span><span style="--x:79%;--y:46%" data-i="4">5</span><span style="--x:70%;--y:62%" data-i="5">6</span>
       </div>
-      <figure class="build-final"><img src="assets/img/still-4-d.webp" alt="" loading="lazy"><figcaption><svg viewBox="0 0 192 93"><use href="#mk-roof"/><use href="#mk-peak" class="pk"/></svg>All seven, finished</figcaption></figure>
-    </div>
-    <div class="build-meter" aria-hidden="true"><i></i></div>
+      <figcaption class="lc-cap"><b>A Summit roof</b><span>Rendered for illustration</span></figcaption>
+    </figure>
   </div>
 </section>
 
-<!-- ============ PROOF: the inspection ============ -->
-<section class="proof peaked" id="proof">
+<!-- ============ PICK YOUR ROOF ============ -->
+<section class="pick" id="pick" aria-label="Pick your roof">
+  <div class="pick-imgs" aria-hidden="true">
+    <img class="on" data-k="charcoal" src="assets/img/pick/charcoal.webp" alt="">
+    <img data-k="wood" src="assets/img/pick/wood.webp" alt="" loading="lazy">
+    <img data-k="black-metal" src="assets/img/pick/black-metal.webp" alt="" loading="lazy">
+    <img data-k="galv" src="assets/img/pick/galv.webp" alt="" loading="lazy">
+  </div>
+  <div class="pick-panel">
+    <p class="eyebrow">Pick your roof</p>
+    <h2 class="pick-h">Same house. Your call.</h2>
+    <div class="pick-tabs" role="tablist" aria-label="Roof type">
+      <button role="tab" aria-selected="true" data-type="shingle">Shingle</button>
+      <button role="tab" aria-selected="false" data-type="metal">Standing seam metal</button>
+    </div>
+    <div class="pick-sw" data-type="shingle">
+      <button class="sw on" data-k="charcoal" style="--c:#34383d" aria-label="Charcoal shingle"></button>
+      <button class="sw" data-k="wood" style="--c:#6b5442" aria-label="Weathered wood shingle"></button>
+    </div>
+    <div class="pick-sw" data-type="metal" hidden>
+      <button class="sw" data-k="black-metal" style="--c:#1d1f22" aria-label="Matte black metal"></button>
+      <button class="sw" data-k="galv" style="--c:#b9c0c6" aria-label="Galvalume metal"></button>
+    </div>
+    <dl class="pick-spec">
+      <div><dt>Color</dt><dd data-f="name">Charcoal</dd></div>
+      <div><dt>System</dt><dd data-f="sys">Architectural laminated shingle</dd></div>
+      <div><dt>Warranty</dt><dd data-f="war">30-yr manufacturer + lifetime labor</dd></div>
+      <div><dt>Good for</dt><dd data-f="for">Most homes, best value per square foot</dd></div>
+    </dl>
+    <a class="btn btn-hot" href="#book">Get a quote for this roof</a>
+    <p class="pick-note">Rendered previews. Your inspector brings real samples.</p>
+  </div>
+</section>
+
+
+<section class="proof" id="proof">
   <div class="proof-grid">
     <div class="proof-copy">
       <p class="eyebrow">The free inspection</p>
@@ -192,7 +231,6 @@
   </div>
 </section>
 
-<!-- ============ DRONE REEL: SUMMIT wordmark ============ -->
 <section class="reel" aria-label="Summit drone footage of finished roofs">
   <div class="reel-stage">
     <video class="reel-vid" src="assets/video/drone-reel.mp4" muted loop playsinline preload="none" poster="assets/img/drone-reel.webp"></video>
@@ -212,7 +250,6 @@
   </div>
 </section>
 
-<!-- ============ WORK: pinned horizontal roofline ============ -->
 <section class="work" id="work" aria-label="Recent Summit roofs">
   <div class="work-stage">
     <div class="work-head">
@@ -233,8 +270,47 @@
   </div>
 </section>
 
-<!-- ============ TERRITORY ============ -->
-<section class="territory peaked" id="territory">
+<!-- ============ SERVICES: expanding panels ============ -->
+<section class="services" id="services">
+  <div class="svc-head">
+    <p class="eyebrow eyebrow-dark">What we do</p>
+    <h2 class="h-xl">One crew, accountable for the whole job.</h2>
+  </div>
+  <ul class="panels" role="list">
+    <li class="pn on" style="--img:url(img/install-2.webp)"><a href="#book"><span class="pn-n">01</span><b>Roof replacement</b><p>Full tear-off to the deck and a new shingle or metal system.</p></a></li>
+    <li class="pn" style="--img:url(img/hail-slope.webp)"><a href="#book"><span class="pn-n">02</span><b>Storm &amp; hail</b><p>Emergency tarping, documented damage, insurance claim support start to finish.</p></a></li>
+    <li class="pn" style="--img:url(img/commercial-metal.webp)"><a href="#book"><span class="pn-n">03</span><b>Commercial</b><p>Flat-roof repairs through full standing seam metal installs.</p></a></li>
+    <li class="pn" style="--img:url(img/after-1.webp)"><a href="#book"><span class="pn-n">04</span><b>Repairs</b><p>Leaks, flashing and pipe boots, fixed without selling you a roof.</p></a></li>
+    <li class="pn" style="--img:url(img/after-9.webp)"><a href="#book"><span class="pn-n">05</span><b>Gutters &amp; exterior</b><p>Gutters, siding, fascia and soffit, rebuilt by the same crew.</p></a></li>
+    <li class="pn" style="--img:url(img/after-7.webp)"><a href="#book"><span class="pn-n">06</span><b>Construction</b><p>Exterior rebuilds and remodels when the damage goes past the roof.</p></a></li>
+  </ul>
+</section>
+
+<!-- ============ REVIEWS: on camera ============ -->
+<section class="reviews" id="reviews">
+  <div class="rev-grid">
+    <div class="rev-copy">
+      <p class="eyebrow">Homeowners, on camera</p>
+      <h2 class="h-xl">Don't take our word for it.</h2>
+      <p class="rev-score"><b>5.0</b><span>84 five-star<br>Google reviews</span></p>
+      <blockquote><p>"After a recent storm, our roof was severely damaged. Summit responded quickly with excellent emergency repairs. They handled everything start to finish."</p><cite>Bryan M., storm damage repair</cite></blockquote>
+    </div>
+    <div class="rev-stage">
+      <figure class="rv-main"><video src="assets/video/testimonial-kathy.mp4" preload="metadata" playsinline controls poster="assets/img/rv-kathy.webp"></video></figure>
+      <div class="rv-thumbs" role="list">
+        <button class="rvt on" data-src="assets/video/testimonial-kathy.mp4" data-poster="assets/img/rv-kathy.webp"><img src="assets/img/rv-kathy.webp" alt=""><span><b>Kathy</b>Fort Worth</span></button>
+        <button class="rvt" data-src="assets/video/testimonial-robert.mp4" data-poster="assets/img/rv-robert.webp"><img src="assets/img/rv-robert.webp" alt=""><span><b>Robert</b>North Texas</span></button>
+        <button class="rvt" data-src="assets/video/testimonial-homeowner.mp4" data-poster="assets/img/rv-homeowner.webp"><img src="assets/img/rv-homeowner.webp" alt=""><span><b>Homeowner</b>Storm restoration</span></button>
+      </div>
+    </div>
+  </div>
+  <div class="rev-more">
+    <blockquote><p>"The team was professional, efficient, and finished ahead of schedule."</p><cite>Emily R., roof replacement</cite></blockquote>
+    <blockquote><p>"The crew was punctual, courteous, and meticulous. The new roof looks fantastic."</p><cite>James L., roof installation</cite></blockquote>
+  </div>
+</section>
+
+<section class="territory" id="territory">
   <div class="terr-copy">
     <p class="eyebrow">Where we work</p>
     <h2 class="h-xl">Three states.<br>One crew standard.</h2>
@@ -255,89 +331,36 @@
   </figure>
 </section>
 
-<!-- ============ WARRANTY PLATE ============ -->
-<section class="plate" aria-label="Warranty and credentials">
-  <div class="plate-inner">
-    <svg class="plate-mark" viewBox="0 0 192 93" aria-hidden="true"><use href="#mk-roof"/><use href="#mk-peak" class="pk"/></svg>
-    <div class="plate-big">
-      <p class="plate-num">Lifetime</p>
-      <p class="plate-lab">labor warranty on every roof we install</p>
-    </div>
-    <ul class="plate-list">
-      <li><b>30-yr</b><span>manufacturer shingle warranty</span></li>
-      <li><b>5.0</b><span>on Google, 84 reviews</span></li>
-      <li><b>A+</b><span>BBB accredited</span></li>
-      <li><b>$0</b><span>for a documented inspection</span></li>
+<!-- ============ THE SUMMIT STANDARD: process + warranty ============ -->
+<section class="standard" aria-labelledby="std-h">
+  <div class="std-bg" aria-hidden="true"><img src="assets/img/scene-6.webp" alt="" loading="lazy"></div>
+  <div class="std-top">
+    <p class="eyebrow">The Summit standard</p>
+    <h2 class="std-h" id="std-h"><span>Lifetime</span> labor warranty on every roof we install.</h2>
+    <ul class="std-facts">
+      <li><b>30-yr</b>manufacturer shingle warranty</li>
+      <li><b>1–2</b>days to install most homes</li>
+      <li><b>$0</b>for a documented inspection</li>
+      <li><b>A+</b>BBB accredited</li>
     </ul>
-    <div class="plate-badges">
-      <img src="assets/img/iko-craftsman-premier.webp" alt="IKO Craftsman Premier contractor" width="136" height="168" loading="lazy">
-      <img src="assets/img/tamko-pro-diamond.webp" alt="TAMKO Pro Diamond certified" width="194" height="168" loading="lazy">
-      <img src="assets/img/rsra.webp" alt="RSRA certified" width="120" height="120" loading="lazy">
-      <img src="assets/img/rcat.webp" alt="RCAT member" width="168" height="168" loading="lazy">
-      <img src="assets/img/bbb.webp" alt="BBB A+ rating" width="120" height="64" loading="lazy">
-    </div>
   </div>
-</section>
-
-<!-- ============ SERVICES ============ -->
-<section class="services" id="services">
-  <div class="svc-head">
-    <p class="eyebrow">What we do</p>
-    <h2 class="h-xl">One crew, accountable for the whole job.</h2>
-  </div>
-  <div class="svc">
-    <ul class="svc-list" role="list">
-      <li class="is-on" data-img="assets/img/install-2.webp"><a href="#book"><span class="svc-n">Roof replacement</span><span class="svc-d">Full tear-off to the deck and a new architectural shingle or metal system.</span></a></li>
-      <li data-img="assets/img/hail-slope.webp"><a href="#book"><span class="svc-n">Storm &amp; hail restoration</span><span class="svc-d">Emergency tarping, documented damage and insurance claim support start to finish.</span></a></li>
-      <li data-img="assets/img/commercial-metal.webp"><a href="#book"><span class="svc-n">Commercial roofing</span><span class="svc-d">Flat-roof repairs through full standing seam metal installs for businesses.</span></a></li>
-      <li data-img="assets/img/after-1.webp"><a href="#book"><span class="svc-n">Roof repair</span><span class="svc-d">Leaks, missing shingles, flashing and pipe boots, fixed without selling you a roof.</span></a></li>
-      <li data-img="assets/img/drone-3.webp"><a href="#book"><span class="svc-n">Roof inspections</span><span class="svc-d">Free, top to bottom, every issue photographed and written up.</span></a></li>
-      <li data-img="assets/img/after-9.webp"><a href="#book"><span class="svc-n">Gutters, siding, fascia &amp; soffit</span><span class="svc-d">The exterior around the roof, rebuilt by the same crew.</span></a></li>
-      <li data-img="assets/img/after-7.webp"><a href="#book"><span class="svc-n">Construction &amp; remodeling</span><span class="svc-d">Exterior rebuilds and remodels when the damage goes past the roof.</span></a></li>
-    </ul>
-    <figure class="svc-fig" aria-hidden="true"><img src="assets/img/install-2.webp" alt=""></figure>
-  </div>
-</section>
-
-<!-- ============ REVIEWS ============ -->
-<section class="reviews peaked peaked-light" id="reviews">
-  <div class="rev-head">
-    <p class="eyebrow eyebrow-dark">Homeowners, on camera</p>
-    <h2 class="h-xl">Don't take our word for it. Take theirs.</h2>
-    <p class="rev-score"><b>5.0</b><span>84 five-star Google reviews</span></p>
-  </div>
-  <div class="rev-videos">
-    <figure class="rv"><video src="assets/video/testimonial-robert.mp4" preload="metadata" playsinline controls poster="assets/img/rv-robert.webp"></video><figcaption><b>Robert</b>North Texas homeowner</figcaption></figure>
-    <figure class="rv rv-up"><video src="assets/video/testimonial-kathy.mp4" preload="metadata" playsinline controls poster="assets/img/rv-kathy.webp"></video><figcaption><b>Kathy</b>Fort Worth homeowner</figcaption></figure>
-    <figure class="rv"><video src="assets/video/testimonial-homeowner.mp4" preload="metadata" playsinline controls poster="assets/img/rv-homeowner.webp"></video><figcaption><b>Summit homeowner</b>Storm restoration customer</figcaption></figure>
-  </div>
-  <div class="rev-quotes">
-    <blockquote><p>After a recent storm, our roof was severely damaged. Summit responded quickly with excellent emergency repairs. They handled everything start to finish.</p><cite>Bryan M., storm damage repair</cite></blockquote>
-    <blockquote><p>The team was professional, efficient, and finished ahead of schedule.</p><cite>Emily R., roof replacement</cite></blockquote>
-    <blockquote><p>The crew was punctual, courteous, and meticulous. The new roof looks fantastic.</p><cite>James L., roof installation</cite></blockquote>
-  </div>
-</section>
-
-<!-- ============ PROCESS ============ -->
-<section class="process" aria-labelledby="proc-h">
-  <div class="proc-head">
-    <p class="eyebrow">After you call</p>
-    <h2 class="h-xl" id="proc-h">From first call to final walkthrough.</h2>
-  </div>
-  <ol class="proc-track">
-    <li><span class="proc-day">Inspection</span><h3>We get on the roof</h3><p>Top to bottom, every issue photographed. Free, and you keep the report.</p></li>
-    <li><span class="proc-day">Estimate</span><h3>A written number</h3><p>Material options and financing laid out in plain language. No pressure, no work you don't need.</p></li>
-    <li><span class="proc-day">Install</span><h3>One to two days</h3><p>Most homes. Certified in-house crew, property protected, site cleaned every day.</p></li>
-    <li><span class="proc-day">Walkthrough</span><h3>We inspect it together</h3><p>Final check side by side, then we register your warranties.</p></li>
+  <ol class="std-steps">
+    <li><span>01</span><h3>We get on the roof</h3><p>Top to bottom, every issue photographed. Free, and you keep the report.</p></li>
+    <li><span>02</span><h3>A written number</h3><p>Material options and financing in plain language. No pressure, no work you don't need.</p></li>
+    <li><span>03</span><h3>One to two days</h3><p>Certified in-house crew, property protected, site cleaned every day.</p></li>
+    <li><span>04</span><h3>We walk it together</h3><p>Final check side by side, then we register your warranties.</p></li>
   </ol>
-  <div class="finance">
-    <h3>A new roof that fits the budget.</h3>
-    <p>Pay over time through Summit's financing partners. No prepayment penalties, no equity or appraisal required, fast decisions. For qualified applicants.</p>
+  <div class="std-badges">
+    <img src="assets/img/iko-craftsman-premier.webp" alt="IKO Craftsman Premier contractor" loading="lazy">
+    <img src="assets/img/tamko-pro-diamond.webp" alt="TAMKO Pro Diamond certified" loading="lazy">
+    <img src="assets/img/rsra.webp" alt="RSRA certified" loading="lazy">
+    <img src="assets/img/rcat.webp" alt="RCAT member" loading="lazy">
+    <img src="assets/img/bbb.webp" alt="BBB A+ rating" loading="lazy">
+    <p>Financing for qualified applicants: no prepayment penalties, no equity or appraisal required.</p>
   </div>
 </section>
 
-<!-- ============ BOOK ============ -->
-<section class="book peaked" id="book">
+<section class="book" id="book">
   <div class="book-bg" aria-hidden="true"><img src="assets/img/still-4-d.webp" alt="" loading="lazy"></div>
   <div class="book-copy">
     <p class="eyebrow">Free inspection</p>
@@ -367,7 +390,6 @@
   </form>
 </section>
 
-<!-- ============ FAQ ============ -->
 <section class="faq" aria-labelledby="faq-h">
   <h2 class="h-lg" id="faq-h">Straight answers.</h2>
   <div class="faq-cols">
@@ -402,7 +424,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
-<script src="assets/app.js?v=eae9238c"></script>
+<script src="assets/app.js?v=ba077d85"></script>
 <div id="demoToast" role="status" style="position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#14283f;color:#f1f5fa;border:1px solid #4a90e2;padding:12px 18px;border-radius:4px;font:600 15px/1.3 Archivo,sans-serif;z-index:99;opacity:0;transition:opacity .2s;pointer-events:none">Concept preview: calls and email are turned off.</div>
 <script>document.addEventListener('click',e=>{const a=e.target.closest('a[href^="tel:"],a[href^="mailto:"]');if(!a)return;e.preventDefault();const t=document.getElementById('demoToast');t.style.opacity=1;clearTimeout(t._h);t._h=setTimeout(()=>t.style.opacity=0,2200)});</script>
 </body>
