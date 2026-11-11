@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Instrument+Serif:ital@0;1&family=Michroma&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<link rel="stylesheet" href="assets/site.css?v=4fff5175">
+<link rel="stylesheet" href="assets/site.css?v=9d187df8">
 <link rel="preload" as="image" href="assets/img/frame-storm.webp">
 </head>
 <body class="is-intro">
@@ -202,18 +202,19 @@
   </div>
   <div class="ba2-wrap">
     <div class="ba2-stage" style="--pos:50%">
-      <img class="ba2-after" src="assets/img/still-4-d.webp" alt="After: the same home with a new charcoal shingle roof">
-      <img class="ba2-before" src="assets/img/still-1-d.webp" alt="Before: storm-damaged roof with a blue tarp">
+      <img class="ba2-after" src="assets/img/v5/ba0-after.webp" alt="After: the same ranch home with a new charcoal shingle roof">
+      <img class="ba2-before" src="assets/img/v5/ba0-before.webp" alt="Before: hail-damaged shingle roof after a storm">
       <span class="ba-l">Before</span><span class="ba-r">After</span>
       <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after">
       <i class="ba-handle"><b><svg viewBox="80 57 73 37"><use href="#mk-peak"/></svg></b></i>
+      <div class="ba2-cap" aria-live="polite"><b>Hail-hit ranch, new roof</b><span>Tear-off to the deck and a full architectural shingle system.</span></div>
       <p class="ba2-note">Illustrative example</p>
     </div>
     <ol class="ba2-tabs" role="tablist" aria-label="Choose a job">
-      <li><button class="on" role="tab" aria-selected="true" data-b="assets/img/still-1-d.webp" data-a="assets/img/still-4-d.webp"><span>01</span><b>Hail-hit home, new roof</b><em>Tear-off to the deck and a full architectural shingle system.</em></button></li>
-      <li><button role="tab" aria-selected="false" data-b="assets/img/v5/ba1-before.webp" data-a="assets/img/v5/ba1-after.webp"><span>02</span><b>Worn 3-tab, replaced</b><em>Cracked tabs, rusted vents and a failing pipe boot, all new.</em></button></li>
-      <li><button role="tab" aria-selected="false" data-b="assets/img/v5/ba2-before.webp" data-a="assets/img/v5/ba2-after.webp"><span>03</span><b>Storm-torn eave, rebuilt</b><em>New fascia, vented soffit and a seamless gutter.</em></button></li>
-      <li><button role="tab" aria-selected="false" data-b="assets/img/v5/ba3-before.webp" data-a="assets/img/v5/ba3-after.webp"><span>04</span><b>Ponding flat roof, resurfaced</b><em>Old membrane out, a new white TPO roof in.</em></button></li>
+      <li><button class="on" role="tab" aria-selected="true" data-b="assets/img/v5/ba0-before.webp" data-a="assets/img/v5/ba0-after.webp"><img src="assets/img/v5/ba0-after-m.webp" alt="" loading="lazy"><span>01</span><b>Hail-hit ranch, new roof</b><em>Tear-off to the deck and a full architectural shingle system.</em></button></li>
+      <li><button role="tab" aria-selected="false" data-b="assets/img/v5/ba1-before.webp" data-a="assets/img/v5/ba1-after.webp"><img src="assets/img/v5/ba1-after-m.webp" alt="" loading="lazy"><span>02</span><b>Worn 3-tab, replaced</b><em>Cracked tabs, rusted vents and a failing pipe boot, all new.</em></button></li>
+      <li><button role="tab" aria-selected="false" data-b="assets/img/v5/ba2-before.webp" data-a="assets/img/v5/ba2-after.webp"><img src="assets/img/v5/ba2-after-m.webp" alt="" loading="lazy"><span>03</span><b>Storm-torn eave, rebuilt</b><em>New fascia, vented soffit and a seamless gutter.</em></button></li>
+      <li><button role="tab" aria-selected="false" data-b="assets/img/v5/ba3-before.webp" data-a="assets/img/v5/ba3-after.webp"><img src="assets/img/v5/ba3-after-m.webp" alt="" loading="lazy"><span>04</span><b>Ponding flat roof, resurfaced</b><em>Old membrane out, a new white TPO roof in.</em></button></li>
     </ol>
   </div>
 </section>
@@ -232,10 +233,28 @@
       <rect class="reel-fill" x="-50000" y="-50000" width="100000" height="100000" mask="url(#reelMask)"/>
     </svg>
     <div class="reel-copy">
-      <p class="kicker">Shot from our drone</p>
+      <p class="kicker">Summit drone footage</p>
       <p class="reel-line">Real crews. Real roofs. <em>All Summit.</em></p>
     </div>
   </div>
+</section>
+
+<!-- ============ CREW: their own footage ============ -->
+<section class="crew" aria-label="Summit crew footage">
+  <div class="crew-head">
+    <div>
+      <p class="kicker">From the crew's own camera</p>
+      <h2 class="h2">Meet the crew <em>before they knock.</em></h2>
+    </div>
+    <p class="lede">Straight off Summit's Instagram: walking the street, climbing the ladder, knocking on the door and putting the sign in the yard.</p>
+  </div>
+  <div class="crew-row">
+    <figure class="cw"><video src="assets/video/crew/walk.mp4" poster="assets/img/crew/walk.webp" muted loop playsinline preload="none"></video><figcaption><span>01</span>Walking the street</figcaption></figure>
+    <figure class="cw"><video src="assets/video/crew/roof.mp4" poster="assets/img/crew/roof.webp" muted loop playsinline preload="none"></video><figcaption><span>02</span>Up the ladder, onto the roof</figcaption></figure>
+    <figure class="cw"><video src="assets/video/crew/door.mp4" poster="assets/img/crew/door.webp" muted loop playsinline preload="none"></video><figcaption><span>03</span>At the front door</figcaption></figure>
+    <figure class="cw"><video src="assets/video/crew/sign.mp4" poster="assets/img/crew/sign.webp" muted loop playsinline preload="none"></video><figcaption><span>04</span>Sign in the yard</figcaption></figure>
+  </div>
+  <a class="crew-ig" href="https://www.instagram.com/summitsolutionsroofing/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg>@summitsolutionsroofing</a>
 </section>
 
 <!-- ============ JOB SITE ============ -->
@@ -268,8 +287,8 @@
       <p class="kicker">What we do</p>
       <h2 class="svc2-h">One crew, <em>start to finish.</em></h2>
       <div class="svc2-items">
-        <article class="si on"><img class="si-img" src="assets/img/still-3-d.webp" alt="" loading="lazy"><span class="si-n">01</span><h3>Roof replacement</h3><p>Full tear-off to the deck, then a new shingle or metal system built for Texas weather.</p><ul><li>Tear-off and decking check</li><li>Underlayment and ice &amp; water shield</li><li>Lifetime labor warranty</li></ul></article>
-        <article class="si"><img class="si-img" src="assets/img/still-1-d.webp" alt="" loading="lazy"><span class="si-n">02</span><h3>Storm &amp; hail damage</h3><p>We get out fast after a storm, tarp what's open and document everything for your claim.</p><ul><li>Emergency tarping</li><li>Photo-documented damage</li><li>Claim support start to finish</li></ul></article>
+        <article class="si on"><img class="si-img" src="assets/img/v5/svc-install.webp" alt="" loading="lazy"><span class="si-n">01</span><h3>Roof replacement</h3><p>Full tear-off to the deck, then a new shingle or metal system built for Texas weather.</p><ul><li>Tear-off and decking check</li><li>Underlayment and ice &amp; water shield</li><li>Lifetime labor warranty</li></ul></article>
+        <article class="si"><img class="si-img" src="assets/img/v5/svc-tarp.webp" alt="" loading="lazy"><span class="si-n">02</span><h3>Storm &amp; hail damage</h3><p>We get out fast after a storm, tarp what's open and document everything for your claim.</p><ul><li>Emergency tarping</li><li>Photo-documented damage</li><li>Claim support start to finish</li></ul></article>
         <article class="si"><img class="si-img" src="assets/img/v5/svc-commercial.webp" alt="" loading="lazy"><span class="si-n">03</span><h3>Commercial roofing</h3><p>Durable, low-maintenance systems for businesses, from flat-roof repairs to full installs.</p><ul><li>Flat-roof and membrane repair</li><li>Standing seam metal</li><li>Low-maintenance systems</li></ul></article>
         <article class="si"><img class="si-img" src="assets/img/v5/svc-repair.webp" alt="" loading="lazy"><span class="si-n">04</span><h3>Roof repair</h3><p>Leaks, missing shingles, flashing and pipe boots, fixed without trying to sell you a roof.</p><ul><li>Leak tracing</li><li>Flashing and pipe boots</li><li>Wind-damaged shingles</li></ul></article>
         <article class="si"><img class="si-img" src="assets/img/v5/svc-gutter.webp" alt="" loading="lazy"><span class="si-n">05</span><h3>Gutters &amp; exterior</h3><p>Gutters, siding, fascia and soffit, done by the same crew that did the roof.</p><ul><li>Seamless gutters</li><li>Siding</li><li>Fascia and soffit</li></ul></article>
@@ -278,8 +297,8 @@
       <a class="btn" href="#book"><span>Book a free inspection</span><i><svg><use href="#i-arrow"/></svg></i></a>
     </div>
     <div class="svc2-media" aria-hidden="true">
-      <img class="on" src="assets/img/still-3-d.webp" alt="">
-      <img src="assets/img/still-1-d.webp" alt="" loading="lazy">
+      <img class="on" src="assets/img/v5/svc-install.webp" alt="">
+      <img src="assets/img/v5/svc-tarp.webp" alt="" loading="lazy">
       <img src="assets/img/v5/svc-commercial.webp" alt="" loading="lazy">
       <img src="assets/img/v5/svc-repair.webp" alt="" loading="lazy">
       <img src="assets/img/v5/svc-gutter.webp" alt="" loading="lazy">
@@ -329,7 +348,7 @@
 
 <!-- ============ BOOK: three taps to a crew ============ -->
 <section class="book" id="book" aria-label="Book a free inspection">
-  <div class="book-bg" aria-hidden="true"><img src="assets/img/still-4-d.webp" alt="" loading="lazy"></div>
+  <div class="book-bg" aria-hidden="true"><img src="assets/img/install-2.webp" alt="" loading="lazy"></div>
   <div class="book-copy">
     <p class="kicker">Free inspection</p>
     <h2 class="h2">Three taps and a crew is on the way.</h2>
@@ -423,7 +442,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="assets/reviews.js?v=1"></script>
-<script src="assets/app.js?v=4fff5175"></script>
+<script src="assets/app.js?v=9d187df8"></script>
 <div id="demoToast" role="status" style="position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#14283f;color:#f1f5fa;border:1px solid #4a90e2;padding:12px 18px;border-radius:4px;font:600 15px/1.3 Archivo,sans-serif;z-index:99;opacity:0;transition:opacity .2s;pointer-events:none">Concept preview: calls and email are turned off.</div>
 <script>document.addEventListener('click',e=>{const a=e.target.closest('a[href^="tel:"],a[href^="mailto:"]');if(!a)return;e.preventDefault();const t=document.getElementById('demoToast');t.style.opacity=1;clearTimeout(t._h);t._h=setTimeout(()=>t.style.opacity=0,2200)});</script>
 </body>

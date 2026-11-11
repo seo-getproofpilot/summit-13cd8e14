@@ -47,7 +47,7 @@
     return out;
   }
   const vid = $('.film-vid'), fIntro = $('.film-intro'), chaps = $$('.chap'), rail = $('.film-rail'), railSpans = $$('.film-rail span');
-  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=4fff5175`;
+  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=9d187df8`;
   let ready = false, shown = 0, seeking = false, lastBeat = 99;
   vid.addEventListener('loadeddata', () => { ready = true; vid.classList.add('ready'); });
   vid.addEventListener('seeked', () => { seeking = false; });
@@ -169,6 +169,18 @@
     const done = () => { if (++n < 2) return; baB.src = im1.src; baA.src = im2.src; baSet(50); requestAnimationFrame(() => baStage.classList.remove('swap')); nudge(); };
     im1.onload = im2.onload = done; im1.src = pickSrc(b.dataset.b); im2.src = pickSrc(b.dataset.a);
   }));
+  const baCap = $('.ba2-cap');
+  baTabs.forEach(b => b.addEventListener('click', () => {
+    if (!baCap) return;
+    setTimeout(() => { baCap.querySelector('b').textContent = $('b', b).textContent; baCap.querySelector('span').textContent = $('em', b).textContent; }, 180);
+  }));
+  /* crew clips play only while on screen */
+  const crewVids = $$('.cw video');
+  const crewIO = new IntersectionObserver(es => es.forEach(e => {
+    const v = e.target;
+    if (e.isIntersecting && !reduce) { v.preload = 'auto'; v.play().catch(() => {}); } else v.pause();
+  }), { threshold: .35 });
+  crewVids.forEach(v => crewIO.observe(v));
   let nudging = false;
   const nudge = () => {
     if (reduce || nudging) return; nudging = true; let t0 = null;
