@@ -1755,3 +1755,4 @@ h1,.h2,.chap h2,.end-phone{letter-spacing:-.012em!important;line-height:1!import
   .film-copy{width:auto}
 }
 @media (max-width:760px){.sg-list{gap:8px 16px}.sg-list li+li{margin-left:0;padding-left:0;border-left:0}}
+.lx-head:has(b:empty){visibility:hidden}

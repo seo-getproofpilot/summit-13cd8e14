@@ -48,7 +48,7 @@
   }
   const filmStage = $('.film-stage');
   const vid = $('.film-vid'), fIntro = $('.film-intro'), chaps = $$('.chap'), rail = $('.film-rail'), railSpans = $$('.film-rail span');
-  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=b25ea5bf`;
+  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=aff7cc7e`;
   let ready = false, shown = 0, seeking = false, lastBeat = 99;
   vid.addEventListener('loadeddata', () => { ready = true; vid.classList.add('ready'); });
   vid.addEventListener('seeked', () => { seeking = false; });
@@ -126,7 +126,7 @@
     if (act !== lLast) {
       lItems.forEach((li, i) => { li.classList.toggle('on', i === act); li.classList.toggle('seen', lShown >= LWIN[i][0] - .01 || p > DONE); });
       lPinEls.forEach((s, i) => s.classList.toggle('on', i === act));
-      lxN.textContent = '0' + (act < 0 ? (p > DONE ? 6 : 0) : act + 1);
+      lxN.textContent = act < 0 ? (p > DONE ? '06' : '') : '0' + (act + 1);
       lLast = act;
     }
     lPins.classList.toggle('show', lShown > LDUR - .5);
