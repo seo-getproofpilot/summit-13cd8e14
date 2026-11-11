@@ -48,7 +48,7 @@
   }
   const filmStage = $('.film-stage');
   const vid = $('.film-vid'), fIntro = $('.film-intro'), chaps = $$('.chap'), rail = $('.film-rail'), railSpans = $$('.film-rail span');
-  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=745110c7`;
+  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=3fd0ba30`;
   let ready = false, shown = 0, seeking = false, lastBeat = 99;
   vid.addEventListener('loadeddata', () => { ready = true; vid.classList.add('ready'); });
   vid.addEventListener('seeked', () => { seeking = false; });
@@ -213,19 +213,22 @@
   };
   new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); nudge(); } }, { threshold: .55 }).observe(baStage);
 
-  /* ================= SERVICES: pinned, scroll through all six ================= */
-  const svx = $('.svx'), svxTrack = $('.svx-track'), svxCards = $$('.sx'), svxN = $('[data-svx-n]'), svxBar = $('.svx-count s');
-  let svxSpan = 0, svxLast = -1;
-  const svxLayout = () => { const last = svxCards[svxCards.length - 1]; svxSpan = Math.max(0, last.offsetLeft + last.offsetWidth - svxTrack.clientWidth + (small ? 16 : 40)); svx.style.height = `${innerHeight + svxSpan * 1.25}px`; };
-  addEventListener('resize', svxLayout); addEventListener('load', svxLayout); svxLayout();
+  /* ================= SERVICES: index list + shingle-course reveal ================= */
+  const sv = $('.sv10'), svBtns = $$('.sv10-list button'), svSlides = $$('.sv10-slide'), svDs = $$('.sv10-d'), svList = $('.sv10-list');
+  let svLast = 0;
+  const svSet = n => {
+    if (n === svLast) return;
+    svSlides.forEach((el, i) => { el.classList.toggle('on', i === n); el.classList.toggle('was', i === svLast); });
+    svDs.forEach((el, i) => el.classList.toggle('on', i === n));
+    svBtns.forEach((el, i) => { el.classList.toggle('on', i === n); el.classList.toggle('done', i < n); });
+    if (small) { const li = svBtns[n].parentNode; svList.scrollTo({ left: li.offsetLeft - 16, behavior: 'smooth' }); }
+    svLast = n;
+  };
   function svxTick() {
-    if (!inView(svx)) return;
-    const q = prog(svx);
-    svxTrack.style.transform = `translate3d(${(-q * svxSpan).toFixed(1)}px,0,0)`;
-    svxBar.style.transform = `scaleX(${q.toFixed(4)})`;
-    const n = Math.min(5, Math.round(q * 5.4));
-    if (n !== svxLast) { svxN.textContent = '0' + (n + 1); svxCards.forEach((c, i) => c.classList.toggle('on', i === n)); svxLast = n; }
+    if (!inView(sv)) return;
+    const q = prog(sv) * 6, n = Math.min(5, Math.floor(q)); svSet(n); svBtns[n].style.setProperty('--p', Math.min(1, q - n).toFixed(3));
   }
+  svBtns.forEach((b, i) => b.addEventListener('click', () => scrollTo({ top: sv.offsetTop + (sv.offsetHeight - innerHeight) * ((i + .5) / 6), behavior: reduce ? 'auto' : 'smooth' })));
 
   /* ================= WORK track ================= */
   const work = $('.work'), track = $('.work-track');
@@ -262,13 +265,14 @@
   txOn('colony');
   new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); $('.tx').classList.add('seen'); } }, { threshold: .3 }).observe($('.tx'));
 
-  /* ================= FAQ: two-pane answers ================= */
-  const qs = $$('.qa-q'), as = $$('.qa-a');
-  qs.forEach(q => q.addEventListener('click', () => {
-    const i = q.dataset.i;
-    qs.forEach(o => { o.classList.toggle('on', o === q); o.setAttribute('aria-expanded', o === q); });
-    as.forEach(a => a.classList.toggle('on', a.dataset.i === i));
+  /* ================= FAQ: shingle courses ================= */
+  const crs = $$('.crs');
+  crs.forEach(c => $('.crs-q', c).addEventListener('click', () => {
+    const open = !c.classList.contains('on');
+    crs.forEach(o => { o.classList.toggle('on', o === c && open); $('.crs-q', o).setAttribute('aria-expanded', o === c && open); });
   }));
+  const today = $('[data-today]');
+  if (today) today.textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
   /* ================= hero form ================= */
   const hf = $('.hf');
@@ -295,7 +299,7 @@
 
   /* ================= reveals ================= */
   if (!reduce) {
-    const els = $$('.bax-side, .tm-copy, .ig9-head, .prc-head, .work-head, .rv-head, .tx-side, .qa-head, .end-copy, .cf9');
+    const els = $$('.bax-side, .tm-copy, .ig9-head, .prc-head, .work-head, .rv-head, .tx-side, .fq10-side, .end-copy, .tk');
     els.forEach((el, i) => { el.classList.add('rv-in'); el.style.transitionDelay = `${(i % 3) * 80}ms`; });
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
     els.forEach(el => io.observe(el));
