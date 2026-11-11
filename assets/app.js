@@ -46,8 +46,9 @@
     }
     return out;
   }
+  const filmStage = $('.film-stage');
   const vid = $('.film-vid'), fIntro = $('.film-intro'), chaps = $$('.chap'), rail = $('.film-rail'), railSpans = $$('.film-rail span');
-  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=5b86bdf9`;
+  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=3ff8d6d7`;
   let ready = false, shown = 0, seeking = false, lastBeat = 99;
   vid.addEventListener('loadeddata', () => { ready = true; vid.classList.add('ready'); });
   vid.addEventListener('seeked', () => { seeking = false; });
@@ -71,6 +72,7 @@
       if (vid.fastSeek && Math.abs(vid.currentTime - shown) > 2) vid.fastSeek(shown); else vid.currentTime = shown;
       setTimeout(() => { seeking = false; }, 120);
     }
+    filmStage.classList.toggle('brand-on', st.t > 22.6);
     const pastFilm = scrollY > film.offsetHeight - innerHeight * 1.05;
     nav.classList.toggle('solid', pastFilm);
     mbar.classList.toggle('show', pastFilm);
@@ -82,17 +84,34 @@
   $('.hero-sheet-btn').addEventListener('click', () => heroForm.classList.add('open'));
   $('.hf-close').addEventListener('click', () => heroForm.classList.remove('open'));
 
-  /* ================= LAYERS: the roof lifts apart ================= */
-  const lay = $('.layers'), lvid = $('.lc-vid'), lItems = $$('.lay-list li'), lPins = $('.lc-pins'), lPinEls = $$('.lc-pins span');
-  lvid.src = `assets/video/${small ? 'layers-m' : 'layers-d'}.mp4?v=1`;
+  /* ================= BUILD YOUR ROOF: pick it, then the roof lifts apart ================= */
+  const lay = $('.rb'), lvid = $('.lc-vid'), lPoster = $('.lc-poster'), lItems = $$('.lay-list li'), lPins = $('.lc-pins'), lPinEls = $$('.lc-pins span');
+  const ROOFS = {
+    charcoal: { name: 'Charcoal shingle', sys: 'Architectural laminated shingle', war: '30-yr manufacturer + lifetime labor', for: 'Most homes, best value per square foot' },
+    wood: { name: 'Weathered wood shingle', sys: 'Architectural laminated shingle', war: '30-yr manufacturer + lifetime labor', for: 'Warm brick and stone exteriors' },
+    'black-metal': { name: 'Matte black metal', sys: 'Standing seam metal', war: 'Manufacturer warranty + lifetime labor', for: 'Modern looks and commercial buildings' },
+    galv: { name: 'Galvalume metal', sys: 'Standing seam metal', war: 'Manufacturer warranty + lifetime labor', for: 'Shops, barns and commercial roofs' },
+  };
+  const LAYTXT = {
+    shingle: { ridge: 'Ridge cap &amp; vent', 'ridge-p': "Lets attic heat out along the peak, so shingles don't cook from underneath in August.",
+      top: 'Architectural shingles', 'top-p': 'Laminated and heavier than 3-tab, sealed on a starter row at every edge. IKO and TAMKO, by a crew certified for both.' },
+    metal: { ridge: 'Metal ridge cap &amp; vent', 'ridge-p': 'A formed metal cap over a vented ridge, so attic heat gets out and rain stays out.',
+      top: 'Standing seam panels', 'top-p': 'Panels lock together at raised seams with the fasteners hidden underneath, so there are no exposed screws to leak.' },
+  };
+  const vsrc = k => `assets/video/${k === 'charcoal' ? 'layers' : 'layers-' + k}-${small ? 'm' : 'd'}.mp4?v=2`;
+  let roof = 'charcoal';
+  lvid.src = vsrc(roof);
   let lReady = false, lShown = 0, lSeek = false, lLast = -2;
-  lvid.addEventListener('loadeddata', () => { lReady = true; lvid.classList.add('ready'); });
+  lvid.addEventListener('loadeddata', () => { lReady = true; lvid.classList.add('ready'); lvid.currentTime = lShown; });
   lvid.addEventListener('seeked', () => { lSeek = false; });
   const LDUR = 6.96, LWIN = [[.7, 1.65], [1.65, 2.45], [2.45, 3.25], [3.25, 3.95], [3.95, 4.65], [4.65, 99]];
+  const SPLIT = .13, T0 = .17, T1 = .86, DONE = .9;
+  const lt = p => clamp((p - T0) / (T1 - T0), 0, 1) * LDUR;
   function layersTick() {
     if (!inView(lay)) return;
     const p = prog(lay);
-    const t = clamp((p - .06) / .74, 0, 1) * LDUR;
+    lay.classList.toggle('split', p > SPLIT);
+    const t = lt(p);
     lShown += (t - lShown) * (reduce || window.__instant ? 1 : 0.16);
     if (Math.abs(t - lShown) < .004) lShown = t;
     if (lReady && !lSeek && !window.__instant && Math.abs(lvid.currentTime - lShown) > 1 / 96) {
@@ -100,39 +119,37 @@
     }
     let act = -1;
     LWIN.forEach(([a, b], i) => { if (lShown >= a && lShown < b) act = i; });
-    if (p > .86) act = -1;
+    if (p > DONE) act = -1;
     if (act !== lLast) {
-      lItems.forEach((li, i) => { li.classList.toggle('on', i === act); li.classList.toggle('seen', lShown >= LWIN[i][0] - .01 || p > .86); });
+      lItems.forEach((li, i) => { li.classList.toggle('on', i === act); li.classList.toggle('seen', lShown >= LWIN[i][0] - .01 || p > DONE); });
       lPinEls.forEach((s, i) => s.classList.toggle('on', i === act));
       lLast = act;
     }
     lPins.classList.toggle('show', lShown > LDUR - .5);
   }
-  window.__layers = { vid: lvid, t: () => clamp((prog(lay) - .06) / .74, 0, 1) * LDUR };
+  window.__layers = { vid: lvid, t: () => lt(prog(lay)) };
   const pinOn = i => { lItems.forEach((li, j) => li.classList.toggle('on', j === i)); lPinEls.forEach((s, j) => s.classList.toggle('on', j === i)); };
-  lPinEls.forEach((s, i) => s.addEventListener('mouseenter', () => prog(lay) > .86 && pinOn(i)));
-  lItems.forEach((li, i) => li.addEventListener('mouseenter', () => prog(lay) > .86 && pinOn(i)));
+  lPinEls.forEach((s, i) => s.addEventListener('mouseenter', () => prog(lay) > DONE && pinOn(i)));
+  lItems.forEach((li, i) => li.addEventListener('mouseenter', () => prog(lay) > DONE && pinOn(i)));
 
-  /* ================= PICK YOUR ROOF ================= */
-  const ROOFS = {
-    charcoal: { sys: 'Architectural laminated shingle', war: '30-yr manufacturer + lifetime labor', for: 'Most homes, best value per square foot' },
-    wood: { sys: 'Architectural laminated shingle', war: '30-yr manufacturer + lifetime labor', for: 'Warm brick and stone exteriors' },
-    'black-metal': { sys: 'Standing seam metal', war: 'Manufacturer warranty + lifetime labor', for: 'Modern looks and commercial buildings' },
-    galv: { sys: 'Standing seam metal', war: 'Manufacturer warranty + lifetime labor', for: 'Shops, barns and commercial roofs' },
-  };
-  const pickImgs = $$('.pick-imgs img'), sws = $$('.sw'), tabs = $$('.pick-tabs button'), swGroups = $$('.pick-sw');
+  const sws = $$('.rb .sw'), tabs = $$('.rb .pick-tabs button'), swGroups = $$('.rb .pick-sw');
   const pickSet = k => {
-    pickImgs.forEach(im => im.classList.toggle('on', im.dataset.k === k));
+    if (k === roof) return; roof = k;
     sws.forEach(b => b.classList.toggle('on', b.dataset.k === k));
-    Object.entries(ROOFS[k]).forEach(([f, v]) => { const el = $(`.pick-spec [data-f="${f}"]`); if (el) el.textContent = v; });
+    Object.entries(ROOFS[k]).forEach(([f, v]) => $$(`.rb [data-f="${f}"]`).forEach(el => { el.textContent = v; }));
+    const txt = LAYTXT[k.includes('metal') || k === 'galv' ? 'metal' : 'shingle'];
+    Object.entries(txt).forEach(([f, v]) => { const el = $(`.rb [data-l="${f}"]`); if (el) el.innerHTML = v; });
+    lPoster.src = `assets/img/rb/${k}.webp`;
+    lReady = false; lvid.classList.remove('ready'); lvid.src = vsrc(k); lvid.load();
   };
-  if (small) pickImgs.forEach(im => { im.src = im.getAttribute('src').replace('.webp', '-m.webp'); });
   sws.forEach(b => b.addEventListener('click', () => pickSet(b.dataset.k)));
   tabs.forEach(t => t.addEventListener('click', () => {
     tabs.forEach(o => o.setAttribute('aria-selected', o === t));
     swGroups.forEach(g => { g.hidden = g.dataset.type !== t.dataset.type; });
     pickSet(t.dataset.type === 'metal' ? 'black-metal' : 'charcoal');
   }));
+  $('.rb-chip').addEventListener('click', () => scrollTo({ top: lay.offsetTop, behavior: reduce ? 'auto' : 'smooth' }));
+  ['wood', 'black-metal', 'galv'].forEach(k => { const im = new Image(); im.src = `assets/img/rb/${k}.webp`; });
 
   /* ================= INSPECTION: chalk circles on the hits, steps fill ================= */
   const HITS = [[825,340],[928,330],[1078,365],[680,370],[600,322],[510,400],[920,437],[1035,505],[748,525],[537,515],[1138,560],[720,670],[520,695],[432,640],[1455,378],[1172,207],[1100,262]];
@@ -303,7 +320,7 @@
 
   /* ================= reveals ================= */
   if (!reduce) {
-    const els = $$('.svcs-head, .sc, .ba2-head, .team-copy, .insp-head, .work-head, .rv-head, .faq2-side, .close-copy, .close-form');
+    const els = $$('.sv8-head, .sv, .ba2-head, .team-copy, .insp-head, .work-head, .rv-head, .faq2-side, .close-copy, .close-form');
     els.forEach((el, i) => { el.classList.add('rv-in'); el.style.transitionDelay = `${(i % 3) * 80}ms`; });
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
     els.forEach(el => io.observe(el));
