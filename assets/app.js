@@ -48,7 +48,7 @@
   }
   const filmStage = $('.film-stage');
   const vid = $('.film-vid'), fIntro = $('.film-intro'), chaps = $$('.chap'), rail = $('.film-rail'), railSpans = $$('.film-rail span');
-  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=3ff8d6d7`;
+  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=745110c7`;
   let ready = false, shown = 0, seeking = false, lastBeat = 99;
   vid.addEventListener('loadeddata', () => { ready = true; vid.classList.add('ready'); });
   vid.addEventListener('seeked', () => { seeking = false; });
@@ -75,6 +75,7 @@
     filmStage.classList.toggle('brand-on', st.t > 22.6);
     const pastFilm = scrollY > film.offsetHeight - innerHeight * 1.05;
     nav.classList.toggle('solid', pastFilm);
+    nav.classList.toggle('brand-show', scrollY > film.offsetHeight - innerHeight * .3);
     mbar.classList.toggle('show', pastFilm);
   }
   window.__film = { filmState, segs, totalW, vid };
@@ -98,8 +99,10 @@
     metal: { ridge: 'Metal ridge cap &amp; vent', 'ridge-p': 'A formed metal cap over a vented ridge, so attic heat gets out and rain stays out.',
       top: 'Standing seam panels', 'top-p': 'Panels lock together at raised seams with the fasteners hidden underneath, so there are no exposed screws to leak.' },
   };
+  const MATC = { charcoal: '#34383d', wood: '#6b5442', 'black-metal': '#1d1f22', galv: '#b9c0c6' };
   const vsrc = k => `assets/video/${k === 'charcoal' ? 'layers' : 'layers-' + k}-${small ? 'm' : 'd'}.mp4?v=2`;
   let roof = 'charcoal';
+  const lxN = $('[data-lx-n]');
   lvid.src = vsrc(roof);
   let lReady = false, lShown = 0, lSeek = false, lLast = -2;
   lvid.addEventListener('loadeddata', () => { lReady = true; lvid.classList.add('ready'); lvid.currentTime = lShown; });
@@ -123,6 +126,7 @@
     if (act !== lLast) {
       lItems.forEach((li, i) => { li.classList.toggle('on', i === act); li.classList.toggle('seen', lShown >= LWIN[i][0] - .01 || p > DONE); });
       lPinEls.forEach((s, i) => s.classList.toggle('on', i === act));
+      lxN.textContent = '0' + (act < 0 ? (p > DONE ? 6 : 0) : act + 1);
       lLast = act;
     }
     lPins.classList.toggle('show', lShown > LDUR - .5);
@@ -132,7 +136,7 @@
   lPinEls.forEach((s, i) => s.addEventListener('mouseenter', () => prog(lay) > DONE && pinOn(i)));
   lItems.forEach((li, i) => li.addEventListener('mouseenter', () => prog(lay) > DONE && pinOn(i)));
 
-  const sws = $$('.rb .sw'), tabs = $$('.rb .pick-tabs button'), swGroups = $$('.rb .pick-sw');
+  const sws = $$('.rb .sw9'), tabs = $$('.rb .pick-tabs button'), swGroups = $$('.rb .pick-sw');
   const pickSet = k => {
     if (k === roof) return; roof = k;
     sws.forEach(b => b.classList.toggle('on', b.dataset.k === k));
@@ -140,6 +144,8 @@
     const txt = LAYTXT[k.includes('metal') || k === 'galv' ? 'metal' : 'shingle'];
     Object.entries(txt).forEach(([f, v]) => { const el = $(`.rb [data-l="${f}"]`); if (el) el.innerHTML = v; });
     lPoster.src = `assets/img/rb/${k}.webp`;
+    $('.rb-chip img').src = `assets/img/rb/sw-${k}.webp`;
+    lay.style.setProperty('--mat', MATC[k]);
     lReady = false; lvid.classList.remove('ready'); lvid.src = vsrc(k); lvid.load();
   };
   sws.forEach(b => b.addEventListener('click', () => pickSet(b.dataset.k)));
@@ -207,28 +213,18 @@
   };
   new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); nudge(); } }, { threshold: .55 }).observe(baStage);
 
-  /* ================= REEL ================= */
-  const reel = $('.reel'), reelVid = $('.reel-vid'), reelWord = $('.reel-word'), reelFill = $('.reel-fill'), reelCopy = $('.reel-copy');
-  function reelLayout() {
-    const vw = innerWidth, vh = innerHeight;
-    reelWord.setAttribute('x', vw / 2); reelWord.setAttribute('y', vh / 2 + vw * .06);
-    reelWord.setAttribute('font-size', (vw * .17).toFixed(1));
-    reelWord.setAttribute('textLength', (vw * .9).toFixed(1)); reelWord.setAttribute('lengthAdjust', 'spacingAndGlyphs');
-  }
-  reelLayout(); addEventListener('resize', reelLayout);
-  function reelTick() {
-    if (!inView(reel)) { if (!reelVid.paused) reelVid.pause(); return; }
-    if (window.__recT != null) {
-      reelVid.preload = 'auto'; if (!reelVid.paused) reelVid.pause();
-      const want = window.__recT % (reelVid.duration || 26);
-      if (reelVid.readyState >= 1 && Math.abs(reelVid.currentTime - want) > .02) { reelVid.dataset.recSeek = '1'; reelVid.currentTime = want; }
-    } else if (reelVid.paused) { reelVid.preload = 'auto'; reelVid.play().catch(() => {}); }
-    const q = prog(reel);
-    const z = ease(clamp((q - .12) / .5, 0, 1));
-    const s = 1 + z * 2.4, cx = innerWidth / 2, cy = innerHeight / 2;
-    reelWord.setAttribute('transform', `translate(${cx} ${cy}) scale(${s.toFixed(3)}) translate(${-cx} ${-cy})`);
-    reelFill.style.opacity = (1 - clamp((q - .3) / .3, 0, 1)).toFixed(3);
-    reelCopy.classList.toggle('on', q > .58);
+  /* ================= SERVICES: pinned, scroll through all six ================= */
+  const svx = $('.svx'), svxTrack = $('.svx-track'), svxCards = $$('.sx'), svxN = $('[data-svx-n]'), svxBar = $('.svx-count s');
+  let svxSpan = 0, svxLast = -1;
+  const svxLayout = () => { const last = svxCards[svxCards.length - 1]; svxSpan = Math.max(0, last.offsetLeft + last.offsetWidth - svxTrack.clientWidth + (small ? 16 : 40)); svx.style.height = `${innerHeight + svxSpan * 1.25}px`; };
+  addEventListener('resize', svxLayout); addEventListener('load', svxLayout); svxLayout();
+  function svxTick() {
+    if (!inView(svx)) return;
+    const q = prog(svx);
+    svxTrack.style.transform = `translate3d(${(-q * svxSpan).toFixed(1)}px,0,0)`;
+    svxBar.style.transform = `scaleX(${q.toFixed(4)})`;
+    const n = Math.min(5, Math.round(q * 5.4));
+    if (n !== svxLast) { svxN.textContent = '0' + (n + 1); svxCards.forEach((c, i) => c.classList.toggle('on', i === n)); svxLast = n; }
   }
 
   /* ================= WORK track ================= */
@@ -239,9 +235,9 @@
   function workTick() { if (inView(work)) track.style.transform = `translate3d(${(-prog(work) * trackSpan).toFixed(1)}px,0,0)`; }
 
   /* ================= loop ================= */
-  function tick() { heroTick(); layersTick(); reelTick(); workTick(); requestAnimationFrame(tick); }
+  function tick() { heroTick(); layersTick(); svxTick(); workTick(); requestAnimationFrame(tick); }
   requestAnimationFrame(tick);
-  window.__tick = () => { heroTick(); layersTick(); reelTick(); workTick(); };
+  window.__tick = () => { heroTick(); layersTick(); svxTick(); workTick(); };
 
   /* ================= Google reviews carousel ================= */
   const RV = window.SUMMIT_REVIEWS;
@@ -259,40 +255,19 @@
     });
   }
 
-  /* ================= service-area map ================= */
-  let map, spots = {};
-  const ALL = small ? [[26.2, -104.2], [36.9, -93.4]] : [[25.0, -103.5], [36.8, -78.6]];
-  const pad = () => small ? { padding: [10, 10] } : { paddingTopLeft: [400, 30], paddingBottomRight: [30, 30] };
-  function initMap() {
-    if (map || !window.L) return;
-    map = L.map('leaf', { scrollWheelZoom: false, zoomControl: true, zoomSnap: .25 });
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-      attribution: 'Tiles &copy; Esri, HERE, Garmin, &copy; OpenStreetMap contributors', maxZoom: 18,
-    }).addTo(map);
-    const mark = '<svg viewBox="0 0 192 93"><use href="#mk-roof"/><use href="#mk-peak" class="pk"/></svg>';
-    const office = (ll, name, sub) => L.marker(ll, { icon: L.divIcon({ className: 'sm-pin', html: `<i></i>${mark}<b>${name}<small>${sub}</small></b>`, iconSize: [0, 0] }) }).addTo(map);
-    const dot = (ll, name) => L.marker(ll, { icon: L.divIcon({ className: 'sm-dot', html: `<i></i><b>${name}</b>`, iconSize: [0, 0] }) }).addTo(map);
-    const region = (ll, r, name) => {
-      L.circle(ll, { radius: r, color: '#4a90e2', weight: 2, fillColor: '#4a90e2', fillOpacity: .14, dashArray: '6 6' }).addTo(map);
-      L.marker(ll, { icon: L.divIcon({ className: 'sm-reg', html: `<b>${name}</b>`, iconSize: [0, 0] }), interactive: false }).addTo(map);
-    };
-    region([35.45, -97.5], 230000, 'Oklahoma');
-    region([26.25, -80.35], 120000, 'South Florida');
-    region([29.3, -94.9], 70000, 'Gulf Coast');
-    region([32.8, -97.05], 62000, 'DFW'); dot([29.76, -95.37], 'Houston');
-    office([33.096, -96.894], 'The Colony', 'Headquarters'); office([30.27, -97.74], 'Austin', 'Office'); office([31.997, -102.078], 'Midland', 'Office');
-    spots = {
-      colony: [[33.0, -96.95], 9.5], austin: [[30.27, -97.74], 10], midland: [[31.997, -102.078], 10],
-      houston: [[29.55, -95.2], 8.5], oklahoma: [[35.45, -97.5], 6.5], sfl: [[26.25, -80.35], 8],
-    };
-    map.fitBounds(ALL, pad());
-  }
-  new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); initMap(); } }, { rootMargin: '300px' }).observe($('#leaf'));
-  $$('[data-go]').forEach(b => b.addEventListener('click', () => {
-    initMap();
-    $$('.areas-list button').forEach(x => x.classList.toggle('on', x === b));
-    if (b.dataset.go === 'all') { map.flyToBounds(ALL, { ...pad(), duration: 1.2 }); return; }
-    const [ll, z] = spots[b.dataset.go]; map.flyTo(ll, z, { duration: 1.2 });
+  /* ================= service area: Texas ================= */
+  const txPins = $$('.tx-pin'), txBtns = $$('.tx-list button');
+  const txOn = k => { txPins.forEach(g => g.classList.toggle('on', g.dataset.k === k)); txBtns.forEach(b => b.classList.toggle('on', b.dataset.k === k)); };
+  txBtns.forEach(b => { b.addEventListener('mouseenter', () => txOn(b.dataset.k)); b.addEventListener('focus', () => txOn(b.dataset.k)); b.addEventListener('click', () => txOn(b.dataset.k)); });
+  txOn('colony');
+  new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); $('.tx').classList.add('seen'); } }, { threshold: .3 }).observe($('.tx'));
+
+  /* ================= FAQ: two-pane answers ================= */
+  const qs = $$('.qa-q'), as = $$('.qa-a');
+  qs.forEach(q => q.addEventListener('click', () => {
+    const i = q.dataset.i;
+    qs.forEach(o => { o.classList.toggle('on', o === q); o.setAttribute('aria-expanded', o === q); });
+    as.forEach(a => a.classList.toggle('on', a.dataset.i === i));
   }));
 
   /* ================= hero form ================= */
@@ -302,7 +277,7 @@
     let ok = true;
     $$('input[required]', hf).forEach(i => { const bad = !i.value.trim(); i.classList.toggle('bad', bad); if (bad && ok) { i.focus(); ok = false; } });
     if (!ok) return;
-    $$('.in, .btn', hf).forEach(el => { el.hidden = true; el.style.display = 'none'; });
+    $$('.in9, .btn9', hf).forEach(el => { el.hidden = true; el.style.display = 'none'; });
     $('.hf-done', hf).hidden = false;
   });
 
@@ -320,7 +295,7 @@
 
   /* ================= reveals ================= */
   if (!reduce) {
-    const els = $$('.sv8-head, .sv, .ba2-head, .team-copy, .insp-head, .work-head, .rv-head, .faq2-side, .close-copy, .close-form');
+    const els = $$('.bax-side, .tm-copy, .ig9-head, .prc-head, .work-head, .rv-head, .tx-side, .qa-head, .end-copy, .cf9');
     els.forEach((el, i) => { el.classList.add('rv-in'); el.style.transitionDelay = `${(i % 3) * 80}ms`; });
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
     els.forEach(el => io.observe(el));
