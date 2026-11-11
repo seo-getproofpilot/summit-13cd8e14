@@ -48,7 +48,7 @@
   }
   const filmStage = $('.film-stage');
   const vid = $('.film-vid'), fIntro = $('.film-intro'), chaps = $$('.chap'), rail = $('.film-rail'), railSpans = $$('.film-rail span');
-  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=3fd0ba30`;
+  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=5d1c2987`;
   let ready = false, shown = 0, seeking = false, lastBeat = 99;
   vid.addEventListener('loadeddata', () => { ready = true; vid.classList.add('ready'); });
   vid.addEventListener('seeked', () => { seeking = false; });
@@ -213,22 +213,10 @@
   };
   new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); nudge(); } }, { threshold: .55 }).observe(baStage);
 
-  /* ================= SERVICES: index list + shingle-course reveal ================= */
-  const sv = $('.sv10'), svBtns = $$('.sv10-list button'), svSlides = $$('.sv10-slide'), svDs = $$('.sv10-d'), svList = $('.sv10-list');
-  let svLast = 0;
-  const svSet = n => {
-    if (n === svLast) return;
-    svSlides.forEach((el, i) => { el.classList.toggle('on', i === n); el.classList.toggle('was', i === svLast); });
-    svDs.forEach((el, i) => el.classList.toggle('on', i === n));
-    svBtns.forEach((el, i) => { el.classList.toggle('on', i === n); el.classList.toggle('done', i < n); });
-    if (small) { const li = svBtns[n].parentNode; svList.scrollTo({ left: li.offsetLeft - 16, behavior: 'smooth' }); }
-    svLast = n;
-  };
-  function svxTick() {
-    if (!inView(sv)) return;
-    const q = prog(sv) * 6, n = Math.min(5, Math.floor(q)); svSet(n); svBtns[n].style.setProperty('--p', Math.min(1, q - n).toFixed(3));
-  }
-  svBtns.forEach((b, i) => b.addEventListener('click', () => scrollTo({ top: sv.offsetTop + (sv.offsetHeight - innerHeight) * ((i + .5) / 6), behavior: reduce ? 'auto' : 'smooth' })));
+  /* ================= SERVICES: rows, shingle reveal on scroll-in ================= */
+  function svxTick() {}
+  const srIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); srIO.unobserve(e.target); } }), { threshold: .35 });
+  $$('.sr').forEach(r => srIO.observe(r));
 
   /* ================= WORK track ================= */
   const work = $('.work'), track = $('.work-track');
