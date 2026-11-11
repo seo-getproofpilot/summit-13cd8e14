@@ -48,7 +48,7 @@
   }
   const filmStage = $('.film-stage');
   const vid = $('.film-vid'), fIntro = $('.film-intro'), chaps = $$('.chap'), rail = $('.film-rail'), railSpans = $$('.film-rail span');
-  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=5d1c2987`;
+  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=2d15a69d`;
   let ready = false, shown = 0, seeking = false, lastBeat = 99;
   vid.addEventListener('loadeddata', () => { ready = true; vid.classList.add('ready'); });
   vid.addEventListener('seeked', () => { seeking = false; });
@@ -213,10 +213,31 @@
   };
   new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); nudge(); } }, { threshold: .55 }).observe(baStage);
 
-  /* ================= SERVICES: rows, shingle reveal on scroll-in ================= */
+  /* ================= SERVICES: architectural directory ================= */
   function svxTick() {}
-  const srIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); srIO.unobserve(e.target); } }), { threshold: .35 });
-  $$('.sr').forEach(r => srIO.observe(r));
+  const sdRows = $$('.sd-row'), sdImgs = $$('.sd-img'), sdLink = $('.sd-link'), sdBody = $('.sd-body');
+  const sdCap = { k: $('.sd-k'), t: $('.sd-t'), d: $('.sd-d') }, sdSrc = $('.sd-src');
+  const touch = matchMedia('(hover: none)').matches;
+  let sdOn = 0;
+  const sdLine = () => {
+    const r = sdRows[sdOn].getBoundingClientRect(), b = sdBody.getBoundingClientRect();
+    sdLink.style.transform = `translateY(${(r.top - b.top + r.height / 2).toFixed(1)}px)`;
+  };
+  const sdSet = i => {
+    if (i === sdOn) return;
+    sdOn = i; const row = sdRows[i];
+    sdRows.forEach((r, j) => r.classList.toggle('on', j === i));
+    sdImgs.forEach((im, j) => im.classList.toggle('on', j === i));
+    sdCap.k.textContent = row.dataset.k; sdCap.t.innerHTML = row.dataset.t; sdCap.d.textContent = row.dataset.d;
+    sdSrc.textContent = row.dataset.real === '1' ? 'Summit job site' : 'Illustration';
+    sdLine();
+  };
+  sdRows.forEach((r, i) => {
+    r.addEventListener('mouseenter', () => !touch && sdSet(i));
+    r.addEventListener('focus', () => sdSet(i));
+    r.addEventListener('click', e => { if (touch && i !== sdOn) { e.preventDefault(); sdSet(i); } });
+  });
+  addEventListener('resize', sdLine); addEventListener('load', sdLine); requestAnimationFrame(sdLine);
 
   /* ================= WORK track ================= */
   const work = $('.work'), track = $('.work-track');
