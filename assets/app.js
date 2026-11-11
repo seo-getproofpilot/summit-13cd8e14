@@ -47,7 +47,7 @@
     return out;
   }
   const vid = $('.film-vid'), fIntro = $('.film-intro'), chaps = $$('.chap'), rail = $('.film-rail'), railSpans = $$('.film-rail span');
-  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=70b625f8`;
+  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=4fff5175`;
   let ready = false, shown = 0, seeking = false, lastBeat = 99;
   vid.addEventListener('loadeddata', () => { ready = true; vid.classList.add('ready'); });
   vid.addEventListener('seeked', () => { seeking = false; });
@@ -134,72 +134,49 @@
     pickSet(t.dataset.type === 'metal' ? 'black-metal' : 'charcoal');
   }));
 
-  /* ================= STORM REPORT: chalk, loupe, checklist ================= */
-  const HITS = [[260,55,10,7],[453,50,10,7],[568,47,10,7],[372,110,10,7],[467,95,9,6],[460,123,10,7],[427,125,9,7],[200,131,11,8],[556,117,10,7],[580,140,10,7],[465,143,10,7],[660,85,9,7],[302,196,11,8],[263,213,16,13],[287,233,9,7],[452,205,10,7],[478,216,10,7],[559,187,10,7],[687,168,10,8],[718,143,9,7],[498,260,11,8],[210,285,13,8],[416,367,12,9]];
-  const chalk = $('.chalk'), sheet = $('.rs-sheet'), countEl = $('[data-count]'), checks = $$('.rs-checks li');
-  HITS.forEach(([x, y, rx, ry]) => {
+  /* ================= INSPECTION: chalk circles on the hits, steps fill ================= */
+  const HITS = [[825,340],[928,330],[1078,365],[680,370],[600,322],[510,400],[920,437],[1035,505],[748,525],[537,515],[1138,560],[720,670],[520,695],[432,640],[1455,378],[1172,207],[1100,262]];
+  const chalk = $('.insp .chalk'), countEl = $('[data-count]'), isteps = $$('.insp-steps li');
+  HITS.forEach(([x, y], i) => {
     const e = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
-    e.setAttribute('cx', x); e.setAttribute('cy', y); e.setAttribute('rx', rx + 5); e.setAttribute('ry', ry + 4);
-    e.setAttribute('transform', `rotate(${(x * 7) % 30 - 15} ${x} ${y})`);
-    e.style.setProperty('--len', Math.ceil(2 * Math.PI * Math.max(rx, ry) + 30));
+    const rx = 40 + (i * 7) % 12, ry = 27 + (i * 5) % 8;
+    e.setAttribute('cx', x); e.setAttribute('cy', y); e.setAttribute('rx', rx); e.setAttribute('ry', ry);
+    e.setAttribute('transform', `rotate(${(i * 23) % 40 - 20} ${x} ${y})`);
+    e.style.setProperty('--len', Math.ceil(2 * Math.PI * rx + 20));
     chalk.appendChild(e);
   });
-  let reportRan = false;
-  const runReport = () => {
-    if (reportRan) return; reportRan = true;
-    const els = $$('ellipse', chalk), step = reduce ? 0 : 110;
-    els.forEach((e, i) => setTimeout(() => { e.classList.add('drawn'); countEl.textContent = i + 1; }, 200 + i * step));
-    checks.forEach((li, i) => setTimeout(() => li.classList.add('ok'), 400 + i * (reduce ? 0 : 420)));
-    setTimeout(() => sheet.classList.add('done'), reduce ? 0 : 400 + checks.length * 420 + 200);
+  let inspRan = false;
+  const runInsp = () => {
+    if (inspRan) return; inspRan = true;
+    const els = $$('ellipse', chalk), step = reduce ? 0 : 140;
+    els.forEach((e, i) => setTimeout(() => { e.classList.add('drawn'); countEl.textContent = i + 1; }, 250 + i * step));
+    isteps.forEach((li, i) => setTimeout(() => li.classList.add('ok'), 300 + i * (reduce ? 0 : 520)));
   };
-  new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); runReport(); } }, { threshold: .35 }).observe($('.rs-grid'));
-  window.__report = runReport;
-  // loupe: follows the pointer, and tours the hits on its own when idle
-  const photo = $('.rs-photo'), pimg = $('.rs-photo img'), loupe = $('.loupe'), Z = 2.5;
-  loupe.style.backgroundImage = `url(${pimg.getAttribute('src')})`;
-  let manual = 0, tourI = 0, tourT = 0, lx = .5, ly = .5;
-  const placeLoupe = (fx, fy) => {
-    const w = photo.clientWidth, h = photo.clientHeight;
-    loupe.style.left = fx * w + 'px'; loupe.style.top = fy * h + 'px';
-    loupe.style.backgroundSize = `${w * Z}px ${h * Z}px`;
-    const L = loupe.offsetWidth;
-    loupe.style.backgroundPosition = `${-(fx * w * Z - L / 2)}px ${-(fy * h * Z - L / 2)}px`;
-  };
-  photo.addEventListener('pointermove', e => {
-    const r = photo.getBoundingClientRect();
-    manual = performance.now(); loupe.classList.add('on');
-    lx = clamp((e.clientX - r.left) / r.width, 0, 1); ly = clamp((e.clientY - r.top) / r.height, 0, 1);
-    placeLoupe(lx, ly);
-  });
-  function loupeTick(now) {
-    if (!reportRan || !inView(photo) || now - manual < 2500) return;
-    loupe.classList.add('on');
-    if (now - tourT > 1700) { tourI = (tourI + 5) % HITS.length; tourT = now; }
-    const [hx, hy] = HITS[tourI];
-    lx += (hx / 730 - lx) * .06; ly += (hy / 447 - ly) * .06;
-    placeLoupe(lx, ly);
-  }
+  new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); runInsp(); } }, { threshold: .4 }).observe($('.insp-photo'));
+  window.__report = runInsp;
 
-  /* ================= BEFORE / AFTER sliders ================= */
-  $$('.ba-frame').forEach(f => {
-    const r = $('.ba-range', f);
-    const set = () => f.style.setProperty('--pos', r.value + '%');
-    r.addEventListener('input', set); set();
-  });
-  new IntersectionObserver((es, io) => {
-    if (!es[0].isIntersecting || reduce) return; io.disconnect();
-    $$('.ba-frame').forEach((f, i) => {
-      const r = $('.ba-range', f); let t0 = null;
-      const anim = ts => {
-        if (t0 === null) t0 = ts;
-        const k = (ts - t0 - i * 180) / 1400;
-        if (k < 0) return requestAnimationFrame(anim);
-        r.value = 50 + Math.sin(Math.min(k, 1) * Math.PI * 2) * 22; f.style.setProperty('--pos', r.value + '%');
-        if (k < 1) requestAnimationFrame(anim);
-      };
-      requestAnimationFrame(anim);
-    });
-  }, { threshold: .5 }).observe($('.ba-grid'));
+  /* ================= BEFORE / AFTER: one big slider, four jobs ================= */
+  const baStage = $('.ba2-stage'), baRange = $('.ba-range', baStage), baB = $('.ba2-before'), baA = $('.ba2-after'), baTabs = $$('.ba2-tabs button');
+  const baSet = v => { baRange.value = v; baStage.style.setProperty('--pos', v + '%'); };
+  baRange.addEventListener('input', () => baSet(baRange.value));
+  const sfx = small ? '-m.webp' : '.webp';
+  const pickSrc = src => src.includes('/v5/') ? src.replace('.webp', sfx) : src;
+  baTabs.forEach(b => b.addEventListener('click', () => {
+    if (b.classList.contains('on')) return;
+    baTabs.forEach(o => { o.classList.toggle('on', o === b); o.setAttribute('aria-selected', o === b); });
+    baStage.classList.add('swap');
+    const im1 = new Image(), im2 = new Image(); let n = 0;
+    const done = () => { if (++n < 2) return; baB.src = im1.src; baA.src = im2.src; baSet(50); requestAnimationFrame(() => baStage.classList.remove('swap')); nudge(); };
+    im1.onload = im2.onload = done; im1.src = pickSrc(b.dataset.b); im2.src = pickSrc(b.dataset.a);
+  }));
+  let nudging = false;
+  const nudge = () => {
+    if (reduce || nudging) return; nudging = true; let t0 = null;
+    const anim = ts => { if (t0 === null) t0 = ts; const k = Math.min((ts - t0) / 1600, 1);
+      baSet((50 + Math.sin(k * Math.PI * 2) * 24).toFixed(1)); if (k < 1) requestAnimationFrame(anim); else nudging = false; };
+    requestAnimationFrame(anim);
+  };
+  new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); nudge(); } }, { threshold: .55 }).observe(baStage);
 
   /* ================= REEL ================= */
   const reel = $('.reel'), reelVid = $('.reel-vid'), reelWord = $('.reel-word'), reelFill = $('.reel-fill'), reelCopy = $('.reel-copy');
@@ -233,17 +210,28 @@
   function workTick() { if (inView(work)) track.style.transform = `translate3d(${(-prog(work) * trackSpan).toFixed(1)}px,0,0)`; }
 
   /* ================= loop ================= */
-  function tick(now) { heroTick(); layersTick(); reelTick(); workTick(); loupeTick(now || performance.now()); requestAnimationFrame(tick); }
+  function tick() { heroTick(); layersTick(); reelTick(); workTick(); svcTick(); requestAnimationFrame(tick); }
   requestAnimationFrame(tick);
-  window.__tick = () => { heroTick(); layersTick(); reelTick(); workTick(); };
+  window.__tick = () => { heroTick(); layersTick(); reelTick(); workTick(); svcTick(); };
 
-  /* ================= services panels ================= */
-  const pns = $$('.pn');
-  pns.forEach(pn => {
-    const on = () => pns.forEach(o => o.classList.toggle('on', o === pn));
-    pn.addEventListener('mouseenter', on); pn.addEventListener('focusin', on);
-    pn.addEventListener('click', e => { if (!pn.classList.contains('on')) { e.preventDefault(); on(); } });
-  });
+  /* ================= SERVICES: pinned, one at a time ================= */
+  const svc = $('.svc2'), sItems = $$('.si'), sImgs = $$('.svc2-media img'), sBar = $$('.svc2-bar button');
+  let sLast = -1;
+  function svcTick() {
+    if (small || !inView(svc)) return;
+    const p = prog(svc), n = sItems.length;
+    const f = clamp(p * n, 0, n - .001), i = Math.floor(f);
+    sBar.forEach((b, j) => b.style.setProperty('--f', clamp(f - j, 0, 1).toFixed(3)));
+    if (i === sLast) return;
+    sItems.forEach((el, j) => el.classList.toggle('on', j === i));
+    sImgs.forEach((im, j) => { im.classList.toggle('was', j === sLast); im.classList.toggle('on', j === i); });
+    sBar.forEach((b, j) => b.classList.toggle('on', j === i));
+    sLast = i;
+  }
+  sBar.forEach((b, j) => b.addEventListener('click', () => {
+    const top = svc.getBoundingClientRect().top + scrollY, span = svc.offsetHeight - innerHeight;
+    scrollTo({ top: top + span * (j + .5) / sItems.length, behavior: reduce ? 'auto' : 'smooth' });
+  }));
 
   /* ================= Google reviews carousel ================= */
   const RV = window.SUMMIT_REVIEWS;
@@ -304,7 +292,7 @@
     let ok = true;
     $$('input[required]', hf).forEach(i => { const bad = !i.value.trim(); i.classList.toggle('bad', bad); if (bad && ok) { i.focus(); ok = false; } });
     if (!ok) return;
-    $$('.fld, .hf-why, .btn', hf).forEach(el => { el.hidden = true; el.style.display = 'none'; });
+    $$('.in, .btn', hf).forEach(el => { el.hidden = true; el.style.display = 'none'; });
     $('.hf-done', hf).hidden = false;
   });
 
@@ -339,7 +327,7 @@
 
   /* ================= reveals ================= */
   if (!reduce) {
-    const els = $$('.rs-head, .ba-head, .ba, .work-head, .svc-head, .rv-head, .book-copy, .wiz, .faq-cols');
+    const els = $$('.insp-head, .ba2-head, .work-head, .rv-head, .book-copy, .wiz, .faq-cols');
     els.forEach((el, i) => { el.classList.add('rv-in'); el.style.transitionDelay = `${(i % 3) * 80}ms`; });
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
     els.forEach(el => io.observe(el));
