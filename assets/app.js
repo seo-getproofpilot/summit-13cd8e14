@@ -47,7 +47,7 @@
     return out;
   }
   const vid = $('.film-vid'), fIntro = $('.film-intro'), chaps = $$('.chap'), rail = $('.film-rail'), railSpans = $$('.film-rail span');
-  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=5ecaba81`;
+  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=5b86bdf9`;
   let ready = false, shown = 0, seeking = false, lastBeat = 99;
   vid.addEventListener('loadeddata', () => { ready = true; vid.classList.add('ready'); });
   vid.addEventListener('seeked', () => { seeking = false; });
@@ -222,28 +222,9 @@
   function workTick() { if (inView(work)) track.style.transform = `translate3d(${(-prog(work) * trackSpan).toFixed(1)}px,0,0)`; }
 
   /* ================= loop ================= */
-  function tick() { heroTick(); layersTick(); reelTick(); workTick(); svcTick(); requestAnimationFrame(tick); }
+  function tick() { heroTick(); layersTick(); reelTick(); workTick(); requestAnimationFrame(tick); }
   requestAnimationFrame(tick);
-  window.__tick = () => { heroTick(); layersTick(); reelTick(); workTick(); svcTick(); };
-
-  /* ================= SERVICES: pinned, one at a time ================= */
-  const svc = $('.svc2'), sItems = $$('.si'), sImgs = $$('.svc2-media img'), sBar = $$('.svc2-bar button');
-  let sLast = -1;
-  function svcTick() {
-    if (small || !inView(svc)) return;
-    const p = prog(svc), n = sItems.length;
-    const f = clamp(p * n, 0, n - .001), i = Math.floor(f);
-    sBar.forEach((b, j) => b.style.setProperty('--f', clamp(f - j, 0, 1).toFixed(3)));
-    if (i === sLast) return;
-    sItems.forEach((el, j) => el.classList.toggle('on', j === i));
-    sImgs.forEach((im, j) => { im.classList.toggle('was', j === sLast); im.classList.toggle('on', j === i); });
-    sBar.forEach((b, j) => b.classList.toggle('on', j === i));
-    sLast = i;
-  }
-  sBar.forEach((b, j) => b.addEventListener('click', () => {
-    const top = svc.getBoundingClientRect().top + scrollY, span = svc.offsetHeight - innerHeight;
-    scrollTo({ top: top + span * (j + .5) / sItems.length, behavior: reduce ? 'auto' : 'smooth' });
-  }));
+  window.__tick = () => { heroTick(); layersTick(); reelTick(); workTick(); };
 
   /* ================= Google reviews carousel ================= */
   const RV = window.SUMMIT_REVIEWS;
@@ -308,38 +289,21 @@
     $('.hf-done', hf).hidden = false;
   });
 
-  /* ================= booking wizard ================= */
-  const wiz = $('#wiz'), wForm = $('form', wiz), steps = $$('.wz', wiz), stepNo = $('[data-step]', wiz), prog3 = $('.wiz-prog', wiz);
-  const PROG = { 1: .1, 2: .45, 3: .78, 4: 1 };
-  const go = (n, focus = true) => {
-    steps.forEach(s => s.classList.toggle('on', +s.dataset.s === n));
-    stepNo.textContent = Math.min(n, 3);
-    prog3.style.setProperty('--f', PROG[n]); prog3.style.setProperty('--pk', n === 4 ? 1 : 0);
-    $('.wiz-step', wiz).style.visibility = n === 4 ? 'hidden' : 'visible';
-    const f = $(`.wz[data-s="${n}"] input:not([type=radio])`, wiz);
-    if (focus && f && !small) setTimeout(() => f.focus({ preventScroll: true }), 250);
-  };
-  $$('.wz-tiles button', wiz).forEach(b => b.addEventListener('click', () => {
-    $$('.wz-tiles button', wiz).forEach(o => o.classList.toggle('picked', o === b));
-    setTimeout(() => go(2), 220);
-  }));
-  $$('.wz-back', wiz).forEach(b => b.addEventListener('click', () => go(+b.closest('.wz').dataset.s - 1)));
-  const need = names => { let ok = true; names.forEach(n => { const i = wForm.elements[n]; const bad = !i.value.trim(); i.classList.toggle('bad', bad); if (bad && ok) { i.focus(); ok = false; } }); return ok; };
-  $('.wz-next', wiz).addEventListener('click', () => { if (need(['address'])) go(3); });
-  wForm.addEventListener('keydown', e => { if (e.key === 'Enter' && $('.wz.on', wiz).dataset.s === '2') { e.preventDefault(); $('.wz-next', wiz).click(); } });
-  wForm.addEventListener('submit', e => {
+  /* ================= closing form ================= */
+  const cf = $('.close-form');
+  cf.addEventListener('submit', e => {
     e.preventDefault();
-    if (!need(['name', 'phone'])) return;
-    $('[data-echo="phone"]', wiz).textContent = wForm.elements.phone.value.trim();
-    $('[data-echo="address"]', wiz).textContent = wForm.elements.address.value.trim();
-    go(4); $('.wiz-fine', wiz).hidden = true;
+    let ok = true;
+    $$('input[required]', cf).forEach(i => { const bad = !i.value.trim(); i.classList.toggle('bad', bad); if (bad && ok) { i.focus(); ok = false; } });
+    if (!ok) return;
+    $('[data-echo="phone"]', cf).textContent = cf.elements.phone.value.trim();
+    $('[data-echo="address"]', cf).textContent = cf.elements.address.value.trim();
+    cf.classList.add('sent'); $('.cf-done', cf).hidden = false;
   });
-  go(1, false);
-  window.__wiz = go;
 
   /* ================= reveals ================= */
   if (!reduce) {
-    const els = $$('.insp-head, .ba2-head, .work-head, .rv-head, .book-copy, .wiz, .faq-cols');
+    const els = $$('.svcs-head, .sc, .ba2-head, .team-copy, .insp-head, .work-head, .rv-head, .faq2-side, .close-copy, .close-form');
     els.forEach((el, i) => { el.classList.add('rv-in'); el.style.transitionDelay = `${(i % 3) * 80}ms`; });
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
     els.forEach(el => io.observe(el));

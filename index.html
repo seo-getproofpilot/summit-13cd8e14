@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Instrument+Serif:ital@0;1&family=Michroma&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<link rel="stylesheet" href="assets/site.css?v=5ecaba81">
+<link rel="stylesheet" href="assets/site.css?v=5b86bdf9">
 <link rel="preload" as="image" href="assets/img/frame-storm.webp">
 </head>
 <body class="is-intro">
@@ -47,8 +47,8 @@
     <img src="assets/img/logo-white-v2.webp" alt="Summit Solutions Roofing and Construction" width="317" height="202">
   </a>
   <nav class="nav-links" aria-label="Primary">
+    <a href="#services">Services</a>
     <a href="#system">The roof</a>
-    <a href="#pick">Pick your roof</a>
     <a href="#proof">Inspections</a>
     <a href="#work">Our work</a>
     <a href="#reviews">Reviews</a>
@@ -92,23 +92,33 @@
 
     <aside class="hero-form" id="heroForm" aria-label="Request a free inspection">
       <button class="hf-close" type="button" aria-label="Close">×</button>
-      <p class="hf-h">Get a <em>free</em> roof inspection</p>
-      <p class="hf-s">Tell us where. We'll call to set a time and leave you a written report with photos.</p>
+      <p class="hf-h">Request a free roof inspection</p>
+      <p class="hf-s">Written findings and photos of your roof. No pressure, no cost.</p>
       <form class="hf" novalidate>
         <label class="in"><span>Name</span><input name="name" autocomplete="name" required></label>
         <label class="in"><span>Phone</span><input name="phone" type="tel" autocomplete="tel" required></label>
         <label class="in"><span>Property address</span><input name="address" autocomplete="street-address" required></label>
-        <button class="btn btn-block" type="submit"><span>Request my inspection</span><i><svg><use href="#i-arrow"/></svg></i></button>
+        <button class="btn btn-block" type="submit"><span>Get my free inspection</span><i><svg><use href="#i-arrow"/></svg></i></button>
         <div class="hf-done" role="status" hidden><svg><use href="#i-check"/></svg><p><b>You're on the list.</b> Summit will call you to set a time.</p></div>
       </form>
       <div class="hf-trust">
-        <span class="hf-g"><img src="assets/img/google.webp" alt="Google" width="60" height="31"><b>4.9</b><span class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span></span>
+        <span class="hf-g"><img src="assets/img/google.webp" alt="Google" width="60" height="31"><b>4.9</b><span class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><em>84 reviews</em></span>
         <a href="tel:+19723333365"><svg><use href="#i-phone"/></svg>(972) 333-3365</a>
       </div>
     </aside>
     <button class="hero-sheet-btn btn" type="button"><span>Free inspection</span><i><svg><use href="#i-arrow"/></svg></i></button>
     <p class="film-note">Rendered sequence</p>
   </div>
+</section>
+
+<!-- ============ TRUST STRIP ============ -->
+<section class="trust" aria-label="Why homeowners call Summit">
+  <ul>
+    <li><b>Free roof inspections</b><span>Written findings with photographs</span></li>
+    <li><b>Repair or replace</b><span>A recommendation based on your roof</span></li>
+    <li><b>Storm restoration</b><span>Damage documentation and tarping</span></li>
+    <li><b>Google rating 4.9</b><span>From 84 customer reviews</span></li>
+  </ul>
 </section>
 
 <!-- ============ LAYERS: the real roof, lifted apart ============ -->
@@ -171,27 +181,24 @@
   </div>
 </section>
 
-<!-- ============ THE INSPECTION ============ -->
-<section class="insp" id="proof">
-  <div class="insp-head">
+<!-- ============ SERVICES: what Summit does ============ -->
+<section class="svcs" id="services" aria-label="Roofing and exterior services">
+  <div class="svcs-head">
     <div>
-      <p class="kicker">The free inspection</p>
-      <h2 class="h2">Every circle is a hit <em>we documented.</em></h2>
+      <p class="kicker kicker-dark">Residential &amp; commercial roofing</p>
+      <h2 class="h2">Get the right work <em>for your roof.</em></h2>
     </div>
-    <p class="lede">A Summit inspector walks the whole roof, marks every hail strike in chalk and photographs each one. You keep the written report whether you hire us or not, and it's exactly what your adjuster needs to see.</p>
+    <p class="svcs-lede">From a persistent leak to a full replacement, one Summit crew handles the roof and the exterior around it. Tell us what you're seeing and we'll recommend the fix.</p>
   </div>
-  <figure class="insp-photo">
-    <img src="assets/img/v5/hail.webp" alt="Hail strikes circled in chalk across a residential shingle roof" width="1920" height="1072" loading="lazy">
-    <svg class="chalk" viewBox="0 0 1600 893" preserveAspectRatio="none" aria-hidden="true"></svg>
-    <div class="insp-count"><b data-count>0</b><span>hail strikes marked<br>on one slope</span></div>
-    <figcaption>Illustration</figcaption>
-  </figure>
-  <ol class="insp-steps">
-    <li><span>01</span><b>We walk the whole roof</b><p>Every slope, vent, valley and pipe boot, then the decking from the attic.</p></li>
-    <li><span>02</span><b>Every hit gets marked</b><p>Chalk on each strike so nothing gets missed or argued about later.</p></li>
-    <li><span>03</span><b>Every mark gets photographed</b><p>Close-ups and wide shots, organized slope by slope.</p></li>
-    <li><span>04</span><b>You get it in writing</b><p>A written report and estimate, plus help with the claim if you file one.</p></li>
-  </ol>
+  <ul class="svcs-grid">
+    <li class="sc"><a href="https://summitsolutionsroofingandconstruction.com/roof-replacement.html"><figure><img src="assets/img/v5/svc-install.webp" alt="Roofers installing new architectural shingles" loading="lazy"></figure><span class="sc-k">01 Residential</span><h3>Roof replacement</h3><p>A complete tear-off to the deck and a new shingle or metal system, with material options explained.</p><span class="sc-go">Explore roof replacement<svg><use href="#i-arrow"/></svg></span></a></li>
+    <li class="sc"><a href="https://summitsolutionsroofingandconstruction.com/roof-repair.html"><figure><img src="assets/img/v5/svc-repair.webp" alt="Roofer repairing flashing on a shingle roof" loading="lazy"></figure><span class="sc-k">02 Residential</span><h3>Roof repair</h3><p>Leaks, damaged shingles, flashing and pipe boots. The details that keep water out.</p><span class="sc-go">Explore roof repair<svg><use href="#i-arrow"/></svg></span></a></li>
+    <li class="sc"><a href="https://summitsolutionsroofingandconstruction.com/storm-damage.html"><figure><img src="assets/img/v5/svc-tarp.webp" alt="Roofer securing an emergency tarp after a storm" loading="lazy"></figure><span class="sc-k">03 Storm</span><h3>Storm &amp; hail restoration</h3><p>Inspection photos, temporary tarping and repairs after severe weather. Your insurer decides coverage.</p><span class="sc-go">Explore storm damage<svg><use href="#i-arrow"/></svg></span></a></li>
+    <li class="sc"><a href="https://summitsolutionsroofingandconstruction.com/commercial-roofing.html"><figure><img src="assets/img/v5/svc-commercial.webp" alt="Commercial flat roof with rooftop units" loading="lazy"></figure><span class="sc-k">04 Commercial</span><h3>Commercial roofing</h3><p>Flat-roof repair, membranes and metal for business owners and property managers.</p><span class="sc-go">Explore commercial roofing<svg><use href="#i-arrow"/></svg></span></a></li>
+    <li class="sc"><a href="https://summitsolutionsroofingandconstruction.com/gutters.html"><figure><img src="assets/img/v5/svc-gutter.webp" alt="New seamless gutter along a roof edge" loading="lazy"></figure><span class="sc-k">05 Exterior</span><h3>Gutters</h3><p>Seamless gutters, downspouts, fascia and soffit, done by the same crew that did the roof.</p><span class="sc-go">Explore gutters<svg><use href="#i-arrow"/></svg></span></a></li>
+    <li class="sc"><a href="https://summitsolutionsroofingandconstruction.com/construction.html"><figure><img src="assets/img/v5/svc-build.webp" alt="Exterior rebuild with new siding" loading="lazy"></figure><span class="sc-k">06 Construction</span><h3>Siding &amp; exterior construction</h3><p>When storm damage goes past the roof, we rebuild siding and the rest of the exterior too.</p><span class="sc-go">Explore construction<svg><use href="#i-arrow"/></svg></span></a></li>
+  </ul>
+  <p class="svcs-note">Service photos are illustrations. <a href="#work">See real Summit roofs</a></p>
 </section>
 
 <!-- ============ BEFORE / AFTER ============ -->
@@ -219,6 +226,55 @@
   </div>
 </section>
 
+<!-- ============ TEAM: the founder and the crew ============ -->
+<section class="crew team" aria-label="Meet Summit Solutions">
+  <div class="team-grid">
+    <figure class="team-photo"><img src="assets/img/jason-nemes.webp" alt="Jason Nemes, founder of Summit Solutions" width="640" height="640" loading="lazy"><figcaption><b>Jason Nemes</b>Founder</figcaption></figure>
+    <div class="team-copy">
+      <p class="kicker">Meet Summit Solutions</p>
+      <h2 class="h2">A local team you can <em>talk to directly.</em></h2>
+      <p class="lede">Jason Nemes founded Summit Solutions in 2023. Based in The Colony, the team works on homes, commercial roofs and exterior restoration across Texas, Oklahoma and South Florida.</p>
+      <p class="lede">Every job starts with a conversation and a documented inspection, so you understand your options before committing to anything.</p>
+      <blockquote class="team-q"><p>“Extremely professional and clean during the whole process.”</p><cite>Chris B., BBB customer review</cite></blockquote>
+      <a class="team-bbb" href="https://www.bbb.org/us/tx/dallas/profile/roofing-contractors/summit-solutions-roofing-and-construction-llc-0875-91346790" target="_blank" rel="noopener"><img src="assets/img/bbb.webp" alt="" width="40" height="40" loading="lazy"><span><b>BBB Accredited Business</b>Read reviews and business details</span><svg><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+  <div class="team-cam">
+    <p class="team-cam-h">From the crew's own camera</p>
+    <a class="crew-ig" href="https://www.instagram.com/summitsolutionsroofing/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg>@summitsolutionsroofing</a>
+  </div>
+  <div class="crew-row">
+    <figure class="cw"><video src="assets/video/crew/walk.mp4" poster="assets/img/crew/walk.webp" muted loop playsinline preload="none"></video><figcaption><span>01</span>Walking the street</figcaption></figure>
+    <figure class="cw"><video src="assets/video/crew/roof.mp4" poster="assets/img/crew/roof.webp" muted loop playsinline preload="none"></video><figcaption><span>02</span>Up the ladder, onto the roof</figcaption></figure>
+    <figure class="cw"><video src="assets/video/crew/door.mp4" poster="assets/img/crew/door.webp" muted loop playsinline preload="none"></video><figcaption><span>03</span>At the front door</figcaption></figure>
+    <figure class="cw"><video src="assets/video/crew/sign.mp4" poster="assets/img/crew/sign.webp" muted loop playsinline preload="none"></video><figcaption><span>04</span>Sign in the yard</figcaption></figure>
+  </div>
+</section>
+
+<!-- ============ PROCESS: from inspection to completion ============ -->
+<section class="insp" id="proof">
+  <div class="insp-head">
+    <div>
+      <p class="kicker kicker-dark">From inspection to completion</p>
+      <h2 class="h2">Know what happens <em>next.</em></h2>
+    </div>
+    <p class="lede">It starts with a free inspection. A Summit inspector walks the whole roof, marks every hit in chalk and photographs it, so you see exactly what we see before anything gets decided.</p>
+  </div>
+  <figure class="insp-photo">
+    <img src="assets/img/v5/hail.webp" alt="Hail strikes circled in chalk across a residential shingle roof" width="1920" height="1072" loading="lazy">
+    <svg class="chalk" viewBox="0 0 1600 893" preserveAspectRatio="none" aria-hidden="true"></svg>
+    <div class="insp-count"><b data-count>0</b><span>hail strikes marked<br>on one slope</span></div>
+    <figcaption>Illustration</figcaption>
+  </figure>
+  <ol class="insp-steps">
+    <li><span>01</span><b>Inspect</b><p>We walk the roof, mark the damage and photograph every issue we find.</p></li>
+    <li><span>02</span><b>Review your options</b><p>You get a written estimate with the recommended scope and material options.</p></li>
+    <li><span>03</span><b>Complete the work</b><p>We confirm the schedule and explain what to expect while the crew is on site.</p></li>
+    <li><span>04</span><b>Walk through together</b><p>Review the finished roof, the cleanup and your warranty details with the team.</p></li>
+  </ol>
+  <a class="btn insp-cta" href="#book"><span>Book a free inspection</span><i><svg><use href="#i-arrow"/></svg></i></a>
+</section>
+
 <!-- ============ DRONE REEL ============ -->
 <section class="reel" aria-label="Summit drone footage of finished roofs">
   <div class="reel-stage">
@@ -237,24 +293,6 @@
       <p class="reel-line">Real crews. Real roofs. <em>All Summit.</em></p>
     </div>
   </div>
-</section>
-
-<!-- ============ CREW: their own footage ============ -->
-<section class="crew" aria-label="Summit crew footage">
-  <div class="crew-head">
-    <div>
-      <p class="kicker">From the crew's own camera</p>
-      <h2 class="h2">Meet the crew <em>before they knock.</em></h2>
-    </div>
-    <p class="lede">Straight off Summit's Instagram: walking the street, climbing the ladder, knocking on the door and putting the sign in the yard.</p>
-  </div>
-  <div class="crew-row">
-    <figure class="cw"><video src="assets/video/crew/walk.mp4" poster="assets/img/crew/walk.webp" muted loop playsinline preload="none"></video><figcaption><span>01</span>Walking the street</figcaption></figure>
-    <figure class="cw"><video src="assets/video/crew/roof.mp4" poster="assets/img/crew/roof.webp" muted loop playsinline preload="none"></video><figcaption><span>02</span>Up the ladder, onto the roof</figcaption></figure>
-    <figure class="cw"><video src="assets/video/crew/door.mp4" poster="assets/img/crew/door.webp" muted loop playsinline preload="none"></video><figcaption><span>03</span>At the front door</figcaption></figure>
-    <figure class="cw"><video src="assets/video/crew/sign.mp4" poster="assets/img/crew/sign.webp" muted loop playsinline preload="none"></video><figcaption><span>04</span>Sign in the yard</figcaption></figure>
-  </div>
-  <a class="crew-ig" href="https://www.instagram.com/summitsolutionsroofing/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg>@summitsolutionsroofing</a>
 </section>
 
 <!-- ============ JOB SITE ============ -->
@@ -280,37 +318,6 @@
   </div>
 </section>
 
-<!-- ============ SERVICES: pinned, one at a time ============ -->
-<section class="svc2" id="services" aria-label="What Summit does">
-  <div class="svc2-stage">
-    <div class="svc2-copy">
-      <p class="kicker">What we do</p>
-      <h2 class="svc2-h">One crew, <em>start to finish.</em></h2>
-      <div class="svc2-items">
-        <article class="si on"><img class="si-img" src="assets/img/v5/svc-install.webp" alt="" loading="lazy"><span class="si-n">01</span><h3>Roof replacement</h3><p>Full tear-off to the deck, then a new shingle or metal system built for Texas weather.</p><ul><li>Tear-off and decking check</li><li>Underlayment and ice &amp; water shield</li><li>Lifetime labor warranty</li></ul></article>
-        <article class="si"><img class="si-img" src="assets/img/v5/svc-tarp.webp" alt="" loading="lazy"><span class="si-n">02</span><h3>Storm &amp; hail damage</h3><p>We get out fast after a storm, tarp what's open and document everything for your claim.</p><ul><li>Emergency tarping</li><li>Photo-documented damage</li><li>Claim support start to finish</li></ul></article>
-        <article class="si"><img class="si-img" src="assets/img/v5/svc-commercial.webp" alt="" loading="lazy"><span class="si-n">03</span><h3>Commercial roofing</h3><p>Durable, low-maintenance systems for businesses, from flat-roof repairs to full installs.</p><ul><li>Flat-roof and membrane repair</li><li>Standing seam metal</li><li>Low-maintenance systems</li></ul></article>
-        <article class="si"><img class="si-img" src="assets/img/v5/svc-repair.webp" alt="" loading="lazy"><span class="si-n">04</span><h3>Roof repair</h3><p>Leaks, missing shingles, flashing and pipe boots, fixed without trying to sell you a roof.</p><ul><li>Leak tracing</li><li>Flashing and pipe boots</li><li>Wind-damaged shingles</li></ul></article>
-        <article class="si"><img class="si-img" src="assets/img/v5/svc-gutter.webp" alt="" loading="lazy"><span class="si-n">05</span><h3>Gutters &amp; exterior</h3><p>Gutters, siding, fascia and soffit, done by the same crew that did the roof.</p><ul><li>Seamless gutters</li><li>Siding</li><li>Fascia and soffit</li></ul></article>
-        <article class="si"><img class="si-img" src="assets/img/v5/svc-build.webp" alt="" loading="lazy"><span class="si-n">06</span><h3>Construction &amp; remodeling</h3><p>When the damage goes past the roof, we rebuild the rest of the exterior too.</p><ul><li>Storm damage rebuilds</li><li>Exterior remodeling</li><li>One crew, one schedule</li></ul></article>
-      </div>
-      <a class="btn" href="#book"><span>Book a free inspection</span><i><svg><use href="#i-arrow"/></svg></i></a>
-    </div>
-    <div class="svc2-media" aria-hidden="true">
-      <img class="on" src="assets/img/v5/svc-install.webp" alt="">
-      <img src="assets/img/v5/svc-tarp.webp" alt="" loading="lazy">
-      <img src="assets/img/v5/svc-commercial.webp" alt="" loading="lazy">
-      <img src="assets/img/v5/svc-repair.webp" alt="" loading="lazy">
-      <img src="assets/img/v5/svc-gutter.webp" alt="" loading="lazy">
-      <img src="assets/img/v5/svc-build.webp" alt="" loading="lazy">
-      <span class="svc2-tag">Rendered</span>
-    </div>
-    <ol class="svc2-bar" aria-label="Services">
-      <li><button class="on">Replacement</button></li><li><button>Storm &amp; hail</button></li><li><button>Commercial</button></li><li><button>Repair</button></li><li><button>Gutters</button></li><li><button>Construction</button></li>
-    </ol>
-  </div>
-</section>
-
 <!-- ============ GOOGLE REVIEWS ============ -->
 <section class="reviews" id="reviews" aria-label="Google reviews">
   <div class="rv-head">
@@ -332,8 +339,9 @@
 <section class="areas" id="areas" aria-label="Summit service area">
   <div id="leaf" class="areas-map" role="img" aria-label="Map of Summit offices and service areas in Texas, Oklahoma and South Florida"></div>
   <div class="areas-panel">
-    <p class="kicker kicker-dark">Service area</p>
-    <h2 class="h3">Three offices. Three states.</h2>
+    <p class="kicker kicker-dark">Our service areas</p>
+    <h2 class="h3">Rooted in Texas. <em>Ready to help.</em></h2>
+    <p class="areas-sub">Home base is The Colony, with offices in Austin and Midland. Call to confirm service at your property.</p>
     <ul class="areas-list">
       <li><button data-go="colony"><i class="pin-o"></i><span><b>The Colony</b>Headquarters, DFW</span></button></li>
       <li><button data-go="austin"><i class="pin-o"></i><span><b>Austin</b>Central Texas office</span></button></li>
@@ -346,73 +354,46 @@
   </div>
 </section>
 
-<!-- ============ BOOK: three taps to a crew ============ -->
-<section class="book" id="book" aria-label="Book a free inspection">
-  <div class="book-bg" aria-hidden="true"><img src="assets/img/install-2.webp" alt="" loading="lazy"></div>
-  <div class="book-copy">
-    <p class="kicker">Free inspection</p>
-    <h2 class="h2">Three taps and a crew is on the way.</h2>
-    <ul class="book-points">
-      <li><svg><use href="#i-check"/></svg>Free, documented, no pressure</li>
-      <li><svg><use href="#i-check"/></svg>Insurance claim help start to finish</li>
-      <li><svg><use href="#i-check"/></svg>Lifetime labor warranty on every roof</li>
-    </ul>
-    <a class="book-call" href="tel:+19723333365"><span>Rather talk?</span><b>(972) 333-3365</b><em>Mon–Fri 7–6 · Sat 9–6</em></a>
+<!-- ============ FAQ ============ -->
+<section class="faq faq2" aria-labelledby="faq-h">
+  <div class="faq2-side">
+    <p class="kicker kicker-dark">Roofing questions</p>
+    <h2 class="h2" id="faq-h">Get clear answers <em>before you start.</em></h2>
+    <p class="faq2-sub">Talk through repairs, costs and storm damage with the team.</p>
+    <a class="faq2-link" href="https://summitsolutionsroofingandconstruction.com/answers/" target="_blank" rel="noopener">Read Summit's roofing answers<svg><use href="#i-arrow"/></svg></a>
   </div>
-
-  <div class="wiz" id="wiz">
-    <div class="wiz-top">
-      <svg class="wiz-prog" viewBox="-4 -4 200 101" aria-hidden="true"><use class="wp-base" href="#mk-roof"/><use class="wp-line" href="#mk-roof"/><use class="wp-peak" href="#mk-peak"/></svg>
-      <p class="wiz-step"><b data-step>1</b> of 3</p>
-    </div>
-    <form novalidate>
-      <fieldset class="wz on" data-s="1">
-        <legend>What's going on with your roof?</legend>
-        <div class="wz-tiles">
-          <button type="button" data-v="Hail or storm damage"><svg viewBox="0 0 48 48"><path d="M10 26a9 9 0 0 1 3-17.5A12 12 0 0 1 36 12a8 8 0 0 1 2 15.7" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="16" cy="35" r="2.6"/><circle cx="26" cy="40" r="2.6"/><circle cx="34" cy="33" r="2.6"/></svg><span>Hail or storm damage</span></button>
-          <button type="button" data-v="Leak"><svg viewBox="0 0 48 48"><path d="M6 22L24 8l18 14" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M24 22c4 6 6 9 6 12a6 6 0 0 1-12 0c0-3 2-6 6-12z" fill="currentColor"/></svg><span>A leak</span></button>
-          <button type="button" data-v="New roof"><svg viewBox="0 0 48 48"><path d="M4 30L24 12l20 18" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M12 30v12h24V30" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M14 22l10-8 10 8" fill="none" stroke="currentColor" stroke-width="2.4" opacity=".5"/></svg><span>Need a new roof</span></button>
-          <button type="button" data-v="Commercial"><svg viewBox="0 0 48 48"><path d="M6 42V18h36v24M6 18l6-8h24l6 8M14 26h6M28 26h6M14 34h6M28 34h6" fill="none" stroke="currentColor" stroke-width="2.4"/></svg><span>Commercial building</span></button>
-          <button type="button" data-v="Not sure"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M19 19a5 5 0 1 1 7 4.6c-1.4.6-2 1.6-2 3V29" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="24" cy="34" r="1.8"/></svg><span>Not sure, take a look</span></button>
-        </div>
-      </fieldset>
-      <fieldset class="wz" data-s="2">
-        <legend>Where's the property?</legend>
-        <label class="fld fld-lg"><input name="address" autocomplete="street-address" placeholder=" " required><span>Street address, city</span></label>
-        <p class="wz-sub">Filing an insurance claim?</p>
-        <div class="wz-chips">
-          <label><input type="radio" name="claim" value="yes"><span>Yes</span></label>
-          <label><input type="radio" name="claim" value="not yet"><span>Not yet</span></label>
-          <label><input type="radio" name="claim" value="no"><span>No</span></label>
-        </div>
-        <div class="wz-nav"><button type="button" class="wz-back">Back</button><button type="button" class="btn wz-next"><span>Next</span><i><svg><use href="#i-arrow"/></svg></i></button></div>
-      </fieldset>
-      <fieldset class="wz" data-s="3">
-        <legend>Who should we call?</legend>
-        <label class="fld fld-lg"><input name="name" autocomplete="name" placeholder=" " required><span>Your name</span></label>
-        <label class="fld fld-lg"><input name="phone" type="tel" autocomplete="tel" placeholder=" " required><span>Phone number</span></label>
-        <div class="wz-nav"><button type="button" class="wz-back">Back</button><button type="submit" class="btn"><span>Book my inspection</span><i><svg><use href="#i-arrow"/></svg></i></button></div>
-      </fieldset>
-      <div class="wz wz-done" data-s="4" role="status">
-        <svg class="wd-mark" viewBox="-4 -4 200 101" aria-hidden="true"><use href="#mk-roof"/><use href="#mk-peak" class="pk"/></svg>
-        <p class="wd-h">You're on the list.</p>
-        <p class="wd-p">A Summit inspector will call <b data-echo="phone">you</b> to set a time for <b data-echo="address">your roof</b>.</p>
-      </div>
-    </form>
-    <p class="wiz-fine">We only use this to schedule your inspection.</p>
+  <div class="faq2-list">
+    <details open><summary>Should I repair or replace my roof?</summary><p>Missing shingles, leaks and storm damage don't all call for the same fix. We inspect the roof, document what we find and explain whether a targeted repair or a replacement makes sense.</p></details>
+    <details><summary>What does a roof inspection cost?</summary><p>Nothing. Summit offers free, no-pressure roof inspections with written findings and photographs. Call to set a time and confirm service in your area.</p></details>
+    <details><summary>Can you help after hail or wind damage?</summary><p>Yes. We inspect and document storm damage, tarp it when needed and explain the repair scope. Your insurer determines coverage under your policy.</p></details>
+    <details><summary>What affects the price of a new roof?</summary><p>Roof size, pitch, materials and the condition of the decking under the shingles. We review the scope with you in writing. Financing is available to qualified applicants; ask the team for current terms.</p></details>
+    <details><summary>What warranty comes with the work?</summary><p>Ask for the written manufacturer and labor warranty terms for your specific roof. We explain what's covered, any conditions and how future storm damage is handled before work begins.</p></details>
   </div>
 </section>
 
-<!-- ============ FAQ ============ -->
-<section class="faq" aria-labelledby="faq-h">
-  <h2 class="h3" id="faq-h">Straight answers.</h2>
-  <div class="faq-cols">
-    <details><summary>What should I do if my roof has storm damage?</summary><p>Call right away for an emergency inspection. We document the damage, tarp it to stop leaks and walk you through the insurance claim so the repair gets handled quickly and correctly.</p></details>
-    <details><summary>How long does a new roof take?</summary><p>Most residential roofs are installed in one to two days, depending on size, pitch and complexity. We confirm the exact timeline in your estimate.</p></details>
-    <details><summary>What does the warranty cover?</summary><p>A 30-year manufacturer warranty on shingles and a lifetime labor warranty covering material defects and workmanship. Future hail or wind damage is what your insurance and our storm team handle.</p></details>
-    <details><summary>How much does a new roof cost?</summary><p>It depends on material, roof size, pitch and scope. The estimate is free and in writing, with financing options for qualified applicants: no prepayment penalties, no equity or appraisal required.</p></details>
-    <details><summary>Are you certified?</summary><p>Summit is licensed and insured, BBB accredited with an A+ rating, RSRA certified, an IKO Craftsman Premier contractor and TAMKO Pro Diamond certified.</p></details>
+<!-- ============ CLOSE: schedule the inspection ============ -->
+<section class="close" id="book" aria-label="Schedule your free roof inspection">
+  <div class="close-copy">
+    <p class="kicker">Schedule your free roof inspection</p>
+    <h2 class="h2">Let's take a look <em>at your roof.</em></h2>
+    <p class="close-sub">Get photos, straight answers and a written estimate for the work your property actually needs.</p>
+    <a class="close-phone" href="tel:+19723333365"><svg><use href="#i-phone"/></svg>(972) 333-3365</a>
+    <p class="close-hours">Mon–Fri 7am–6pm, Sat 9am–6pm (CST). Sunday closed.</p>
   </div>
+  <form class="close-form" novalidate>
+    <p class="cf-h">Request your inspection</p>
+    <div class="cf-row">
+      <label class="in"><span>Name</span><input name="name" autocomplete="name" required></label>
+      <label class="in"><span>Phone</span><input name="phone" type="tel" autocomplete="tel" required></label>
+    </div>
+    <label class="in"><span>What's going on?</span>
+      <select name="concern"><option>Hail or storm damage</option><option>A leak</option><option>I need a new roof</option><option>Commercial roof</option><option>Gutters or exterior</option><option>Not sure, take a look</option></select>
+    </label>
+    <label class="in"><span>Property address</span><input name="address" autocomplete="street-address" required></label>
+    <button class="btn btn-block" type="submit"><span>Request my inspection</span><i><svg><use href="#i-arrow"/></svg></i></button>
+    <p class="cf-fine">We only use this to schedule your inspection.</p>
+    <div class="cf-done" role="status" hidden><svg viewBox="-4 -4 200 101" aria-hidden="true"><use href="#mk-roof"/><use href="#mk-peak" class="pk"/></svg><p class="cf-dh">You're on the list.</p><p>Summit will call <b data-echo="phone">you</b> to set a time for <b data-echo="address">your roof</b>.</p></div>
+  </form>
 </section>
 
 </main>
@@ -420,8 +401,8 @@
 <footer class="foot">
   <div class="foot-cols">
     <div><h4>Call</h4><a href="tel:+19723333365">(972) 333-3365</a><a href="mailto:Jason@roofsbysummit.com">Jason@roofsbysummit.com</a></div>
-    <div><h4>Offices</h4><p>The Colony · Austin · Midland</p><p>4695 N Colony Blvd #103<br>The Colony, TX 75056</p></div>
-    <div><h4>Serving</h4><p>Texas, Oklahoma &amp; South Florida</p></div>
+    <div><h4>Offices</h4><p>The Colony, Austin and Midland</p><p>4695 N Colony Blvd #103<br>The Colony, TX 75056</p></div>
+    <div><h4>Roofing services</h4><a href="https://summitsolutionsroofingandconstruction.com/roof-repair.html">Roof repair</a><a href="https://summitsolutionsroofingandconstruction.com/roof-replacement.html">Roof replacement</a><a href="https://summitsolutionsroofingandconstruction.com/storm-damage.html">Storm &amp; hail restoration</a><a href="https://summitsolutionsroofingandconstruction.com/commercial-roofing.html">Commercial roofing</a><a href="https://summitsolutionsroofingandconstruction.com/construction.html">Exterior construction</a></div>
     <div><h4>Follow</h4><a href="https://www.instagram.com/summitsolutionsroofing/" rel="noopener" target="_blank">Instagram</a><a href="https://www.facebook.com/p/Summit-Solutions-Roofing-and-Construction-61570251305110/" rel="noopener" target="_blank">Facebook</a></div>
   </div>
   <div class="foot-badges">
@@ -442,7 +423,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="assets/reviews.js?v=1"></script>
-<script src="assets/app.js?v=5ecaba81"></script>
+<script src="assets/app.js?v=5b86bdf9"></script>
 <div id="demoToast" role="status" style="position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#14283f;color:#f1f5fa;border:1px solid #4a90e2;padding:12px 18px;border-radius:4px;font:600 15px/1.3 Archivo,sans-serif;z-index:99;opacity:0;transition:opacity .2s;pointer-events:none">Concept preview: calls and email are turned off.</div>
 <script>document.addEventListener('click',e=>{const a=e.target.closest('a[href^="tel:"],a[href^="mailto:"]');if(!a)return;e.preventDefault();const t=document.getElementById('demoToast');t.style.opacity=1;clearTimeout(t._h);t._h=setTimeout(()=>t.style.opacity=0,2200)});</script>
 </body>
