@@ -8,23 +8,31 @@
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=a00fd1b8">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Michroma&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=eae9238c">
 <link rel="preload" as="image" href="assets/img/frame-storm.webp">
 </head>
 <body>
 
 <a class="skip" href="#main">Skip to content</a>
 
+<!-- the Summit mark, traced from their logo, reused across the page -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="mk-roof" d="M0,92.5 L67.5,92.5 L87,72.8 L62.5,72.3 L103.5,32.3 L167.4,92.5 L192,92.5 L96,0 L61.5,33 L60.5,26 L33,26 L33,60.5 Z"/>
+    <path id="mk-peak" d="M82,92.5 L151,92.5 L117.5,59 Z"/>
+  </defs>
+</svg>
+
 <header class="nav" id="nav">
   <a class="brand" href="#top" aria-label="Summit Solutions Roofing and Construction, home">
     <img src="assets/img/logo-white-v2.webp" alt="Summit Solutions Roofing and Construction" width="317" height="202">
   </a>
   <nav class="nav-links" aria-label="Primary">
-    <a href="#territory">Where we work</a>
     <a href="#system">The roof</a>
-    <a href="#proof">Our work</a>
-    <a href="#services">Services</a>
+    <a href="#proof">Inspections</a>
+    <a href="#work">Our work</a>
+    <a href="#territory">Where we work</a>
     <a href="#reviews">Reviews</a>
   </nav>
   <div class="nav-cta">
@@ -35,12 +43,35 @@
 
 <main id="main">
 
-<!-- ============ HERO: the storm-to-roof film ============ -->
-<section class="film" id="top" aria-label="From storm damage to a new roof">
+<!-- ============ HERO: Summit cover → storm-to-roof film ============ -->
+<section class="film" id="top" aria-label="From storm damage to a new Summit roof">
   <div class="film-stage">
     <img class="film-poster" src="assets/img/frame-storm.webp" alt="" aria-hidden="true">
     <video class="film-vid" muted playsinline preload="auto" aria-hidden="true"></video>
     <div class="film-shade"></div>
+
+    <svg class="cover" aria-hidden="true">
+      <defs>
+        <mask id="coverMask" maskUnits="userSpaceOnUse" x="-50000" y="-50000" width="100000" height="100000">
+          <rect x="-50000" y="-50000" width="100000" height="100000" fill="#fff"/>
+          <g class="cover-g">
+            <use href="#mk-roof" fill="#000"/>
+            <use href="#mk-peak" fill="#000"/>
+            <text class="cover-word" x="96" y="138" text-anchor="middle" textLength="192" lengthAdjust="spacingAndGlyphs" fill="#000">SUMMIT</text>
+          </g>
+        </mask>
+      </defs>
+      <rect class="cover-fill" x="-50000" y="-50000" width="100000" height="100000" mask="url(#coverMask)"/>
+      <g class="cover-g cover-solid">
+        <use class="cover-line" href="#mk-roof"/>
+        <text class="cover-word cover-line" x="96" y="138" text-anchor="middle" textLength="192" lengthAdjust="spacingAndGlyphs">SUMMIT</text>
+        <use class="cover-peak" href="#mk-peak"/>
+        <text class="cover-sub" x="96" y="162" text-anchor="middle" textLength="96" lengthAdjust="spacingAndGlyphs">SOLUTIONS</text>
+        <line class="cover-rule" x1="12" y1="157.6" x2="42" y2="157.6"/><line class="cover-rule" x1="150" y1="157.6" x2="180" y2="157.6"/>
+        <text class="cover-tag" x="96" y="181" text-anchor="middle" textLength="186" lengthAdjust="spacingAndGlyphs">ROOFING AND CONSTRUCTION</text>
+      </g>
+    </svg>
+    <p class="cover-hint" aria-hidden="true">Scroll to watch the job</p>
 
     <div class="film-intro">
       <p class="eyebrow">Texas · Oklahoma · South Florida</p>
@@ -51,7 +82,7 @@
         <a class="btn btn-ghost btn-lg" href="tel:+19723333365">(972) 333-3365</a>
       </div>
       <div class="film-rating">
-        <img src="assets/img/google.webp" alt="" width="60" height="31" onerror="this.remove()">
+        <img src="assets/img/google.webp" alt="" width="60" height="31">
         <span><strong>5.0</strong> from 84 Google reviews</span>
         <span class="sep" aria-hidden="true"></span>
         <span><strong>A+</strong> BBB accredited</span>
@@ -59,44 +90,151 @@
     </div>
 
     <ol class="film-chapters" aria-label="What happens on a Summit roof">
-      <li class="chap" data-i="1">
-        <p class="chap-k">The storm</p>
-        <h2>Hail doesn't make appointments.</h2>
-        <p>We inspect for free, photograph every hit and put it in writing. If it's an insurance claim, we walk you through it.</p>
-      </li>
-      <li class="chap" data-i="2">
-        <p class="chap-k">Tear-off</p>
-        <h2>Down to the deck.</h2>
-        <p>Every damaged layer comes off, so the crew sees the bare deck before anything new goes on it.</p>
-      </li>
-      <li class="chap" data-i="3">
-        <p class="chap-k">Dry-in</p>
-        <h2>Sealed before the first shingle.</h2>
-        <p>Underlayment over the whole deck, metal drip edge on every eave, then shingles row by row from the gutter line up.</p>
-      </li>
-      <li class="chap" data-i="4">
-        <p class="chap-k">Finished</p>
-        <h2>Most roofs: one to two days.</h2>
-        <p>30-year manufacturer shingle warranty. Lifetime labor warranty for as long as you own the home.</p>
-      </li>
-      <li class="chap" data-i="5">
-        <p class="chap-k">Then the next one</p>
-        <h2>Street by street, storm by storm.</h2>
-        <p>Crews out of The Colony, Austin and Midland, covering Texas, Oklahoma and South Florida.</p>
-        <a class="btn btn-hot" href="#book">Get on the schedule</a>
-      </li>
+      <li class="chap"><p class="chap-k">The storm</p><h2>Hail doesn't make appointments.</h2><p>We inspect for free, photograph every hit and put it in writing. If it's an insurance claim, we walk you through it.</p></li>
+      <li class="chap"><p class="chap-k">Tear-off</p><h2>Down to the deck.</h2><p>Every damaged layer comes off, so the crew sees the bare deck before anything new goes on it.</p></li>
+      <li class="chap"><p class="chap-k">Dry-in</p><h2>Sealed before the first shingle.</h2><p>Underlayment over the whole deck, metal drip edge on every eave, then shingles row by row from the gutter line up.</p></li>
+      <li class="chap"><p class="chap-k">Finished</p><h2>Most roofs: one to two days.</h2><p>30-year manufacturer shingle warranty. Lifetime labor warranty for as long as you own the home.</p></li>
+      <li class="chap"><p class="chap-k">Then the next one</p><h2>Street by street, storm by storm.</h2><p>Crews out of The Colony, Austin and Midland, covering Texas, Oklahoma and South Florida.</p><a class="btn btn-hot" href="#book">Get on the schedule</a></li>
     </ol>
 
     <div class="film-rail" aria-hidden="true">
-      <span data-i="1">Storm</span><span data-i="2">Tear-off</span><span data-i="3">Dry-in</span><span data-i="4">Finished</span><span data-i="5">Next</span>
+      <span>Storm</span><span>Tear-off</span><span>Dry-in</span><span>Finished</span><span>Next</span>
       <i class="film-rail-fill"></i>
     </div>
     <p class="film-note">Rendered sequence. Every photo below this point is a real Summit job.</p>
   </div>
 </section>
 
+<!-- ============ BUILD: the roof, layer by layer ============ -->
+<section class="build" id="system" aria-label="The layers of a roof, taken off and rebuilt">
+  <div class="build-stage">
+    <div class="build-copy">
+      <p class="eyebrow">The roof, layer by layer</p>
+      <h2 class="build-h">Seven layers between your attic and the next hailstorm.</h2>
+      <p class="build-status" aria-live="polite"><b>Finished roof</b><span>Scroll to take it apart</span></p>
+      <ol class="build-list">
+        <li data-k="1"><span class="bl-n">01</span><div><h3>Roof deck</h3><p>The plywood everything nails to. We see it bare on every tear-off, so soft spots get replaced, not buried.</p></div></li>
+        <li data-k="2"><span class="bl-n">02</span><div><h3>Ice &amp; water shield</h3><p>Self-sealing membrane along the eaves and in valleys, where leaks start.</p></div></li>
+        <li data-k="3"><span class="bl-n">03</span><div><h3>Synthetic underlayment</h3><p>The water barrier under everything. If a shingle ever lets go, this keeps you dry.</p></div></li>
+        <li data-k="4"><span class="bl-n">04</span><div><h3>Drip edge</h3><p>Metal flashing on every eave and rake that turns water into the gutter, not your fascia.</p></div></li>
+        <li data-k="5"><span class="bl-n">05</span><div><h3>Starter course</h3><p>A sealed first row at the edge, where wind tries to lift a roof first.</p></div></li>
+        <li data-k="6"><span class="bl-n">06</span><div><h3>Architectural shingles</h3><p>Laminated and heavier than 3-tab. IKO and TAMKO, installed by a crew certified by both.</p></div></li>
+        <li data-k="7"><span class="bl-n">07</span><div><h3>Ridge vent &amp; cap</h3><p>Lets attic heat out along the peak, so shingles don't cook from underneath in August.</p></div></li>
+      </ol>
+    </div>
+    <div class="build-scene" aria-hidden="true">
+      <div class="build-floor"></div>
+      <div class="slab">
+        <div class="ly ly-1"><i class="edge"></i></div>
+        <div class="ly ly-2"></div>
+        <div class="ly ly-3"></div>
+        <div class="ly ly-4"><i class="rake"></i></div>
+        <div class="ly ly-5"></div>
+        <div class="ly ly-6"><i class="edge"></i></div>
+        <div class="ly ly-7"></div>
+      </div>
+      <figure class="build-final"><img src="assets/img/still-4-d.webp" alt="" loading="lazy"><figcaption><svg viewBox="0 0 192 93"><use href="#mk-roof"/><use href="#mk-peak" class="pk"/></svg>All seven, finished</figcaption></figure>
+    </div>
+    <div class="build-meter" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+
+<!-- ============ PROOF: the inspection ============ -->
+<section class="proof peaked" id="proof">
+  <div class="proof-grid">
+    <div class="proof-copy">
+      <p class="eyebrow">The free inspection</p>
+      <h2 class="h-xl">Every circle is a hit we documented.</h2>
+      <p class="lede">This is a real Summit inspection: chalk on every hail strike, a photo of each one, and a written report you keep, whether or not you hire us. It's what the adjuster sees.</p>
+      <ul class="proof-points">
+        <li>Top-to-bottom roof walk</li>
+        <li>Every hit marked and photographed</li>
+        <li>Written report and estimate, free</li>
+        <li>Insurance claim support start to finish</li>
+      </ul>
+    </div>
+    <figure class="report">
+      <header class="report-head">
+        <svg viewBox="0 0 192 93" aria-hidden="true"><use href="#mk-roof"/><use href="#mk-peak" class="pk"/></svg>
+        <div><b>Summit inspection</b><span>Hail survey, front slope</span></div>
+        <span class="report-stamp">Documented</span>
+      </header>
+      <div class="report-photo">
+        <img src="assets/img/hail-slope.webp" alt="Summit inspector's chalk circles marking hail strikes across a shingle roof" width="730" height="447" loading="lazy">
+        <svg class="chalk" viewBox="0 0 730 447" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <p class="report-count"><b data-count>0</b> hits circled on this slope</p>
+      </div>
+    </figure>
+  </div>
+
+  <div class="pairs">
+    <article class="pair">
+      <div class="pair-imgs">
+        <figure><img src="assets/img/before-6.webp" alt="Pipe boot flashing dented by hail" loading="lazy"><figcaption>Found</figcaption></figure>
+        <figure><img src="assets/img/after-6.webp" alt="New pipe boot flashing installed" loading="lazy"><figcaption>Fixed</figcaption></figure>
+      </div>
+      <h3>Hail-damaged pipe boots replaced</h3>
+    </article>
+    <article class="pair">
+      <div class="pair-imgs">
+        <figure><img src="assets/img/before-9.webp" alt="Storm-damaged eave and soffit on a brick home" loading="lazy"><figcaption>Found</figcaption></figure>
+        <figure><img src="assets/img/after-9.webp" alt="Rebuilt eave and soffit" loading="lazy"><figcaption>Fixed</figcaption></figure>
+      </div>
+      <h3>Storm-damaged eave and soffit rebuilt</h3>
+    </article>
+    <article class="pair">
+      <div class="pair-imgs">
+        <figure><img src="assets/img/before-7.webp" alt="Storm-damaged exterior on a log-sided home" loading="lazy"><figcaption>Found</figcaption></figure>
+        <figure><img src="assets/img/after-7.webp" alt="Rebuilt exterior after storm damage" loading="lazy"><figcaption>Fixed</figcaption></figure>
+      </div>
+      <h3>Storm-damaged exterior rebuilt</h3>
+    </article>
+  </div>
+</section>
+
+<!-- ============ DRONE REEL: SUMMIT wordmark ============ -->
+<section class="reel" aria-label="Summit drone footage of finished roofs">
+  <div class="reel-stage">
+    <video class="reel-vid" src="assets/video/drone-reel.mp4" muted loop playsinline preload="none" poster="assets/img/drone-reel.webp"></video>
+    <svg class="reel-mask" aria-hidden="true">
+      <defs>
+        <mask id="reelMask" maskUnits="userSpaceOnUse" x="-50000" y="-50000" width="100000" height="100000">
+          <rect x="-50000" y="-50000" width="100000" height="100000" fill="#fff"/>
+          <text class="reel-word" text-anchor="middle" fill="#000">SUMMIT</text>
+        </mask>
+      </defs>
+      <rect class="reel-fill" x="-50000" y="-50000" width="100000" height="100000" mask="url(#reelMask)"/>
+    </svg>
+    <div class="reel-copy">
+      <p class="eyebrow">Shot from our drone</p>
+      <p class="reel-line">Real crews. Real roofs. <em>All Summit.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK: pinned horizontal roofline ============ -->
+<section class="work" id="work" aria-label="Recent Summit roofs">
+  <div class="work-stage">
+    <div class="work-head">
+      <p class="eyebrow">Recent roofs</p>
+      <h2 class="h-xl">From the job site, not a stock library.</h2>
+    </div>
+    <div class="work-track">
+      <figure class="wk wk-tall"><img src="assets/img/hero-main.webp" alt="Summit crew replacing a steep shingle roof" loading="lazy"><figcaption><b>Full replacement</b>Two-story, steep pitch</figcaption></figure>
+      <figure class="wk"><img src="assets/img/scene-12.webp" alt="Finished standing seam metal roof at dusk" loading="lazy"><figcaption><b>Standing seam metal</b>Stone ranch home</figcaption></figure>
+      <figure class="wk wk-tall"><img src="assets/img/drone-1.webp" alt="Synthetic underlayment going down, seen from a drone" loading="lazy"><figcaption><b>Dry-in</b>Synthetic underlayment</figcaption></figure>
+      <figure class="wk"><img src="assets/img/scene-6.webp" alt="Aerial of a finished architectural shingle roof" loading="lazy"><figcaption><b>Architectural shingle</b>Finished and cleaned</figcaption></figure>
+      <figure class="wk wk-tall"><img src="assets/img/install-1.webp" alt="Crew on a two-story brick home mid-install" loading="lazy"><figcaption><b>Storm restoration</b>Crew on site</figcaption></figure>
+      <figure class="wk"><img src="assets/img/commercial-metal.webp" alt="Commercial standing seam metal roof" loading="lazy"><figcaption><b>Commercial</b>Metal roof system</figcaption></figure>
+      <figure class="wk wk-tall"><img src="assets/img/after-4.webp" alt="Drone view of a finished roof in a subdivision" loading="lazy"><figcaption><b>Neighborhood job</b>Final drone check</figcaption></figure>
+      <figure class="wk"><img src="assets/img/scene-7.webp" alt="Finished roof on a single-story home" loading="lazy"><figcaption><b>Replacement</b>Single story</figcaption></figure>
+      <a class="wk wk-cta" href="#book"><span>Your roof<br>next?</span><b>Book a free inspection</b></a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ TERRITORY ============ -->
-<section class="territory" id="territory">
+<section class="territory peaked" id="territory">
   <div class="terr-copy">
     <p class="eyebrow">Where we work</p>
     <h2 class="h-xl">Three states.<br>One crew standard.</h2>
@@ -117,9 +255,10 @@
   </figure>
 </section>
 
-<!-- ============ SPEC PLATE ============ -->
+<!-- ============ WARRANTY PLATE ============ -->
 <section class="plate" aria-label="Warranty and credentials">
   <div class="plate-inner">
+    <svg class="plate-mark" viewBox="0 0 192 93" aria-hidden="true"><use href="#mk-roof"/><use href="#mk-peak" class="pk"/></svg>
     <div class="plate-big">
       <p class="plate-num">Lifetime</p>
       <p class="plate-lab">labor warranty on every roof we install</p>
@@ -140,92 +279,6 @@
   </div>
 </section>
 
-<!-- ============ ROOF SYSTEM ============ -->
-<section class="system" id="system">
-  <div class="sys-head">
-    <p class="eyebrow eyebrow-dark">The roof, taken apart</p>
-    <h2 class="h-xl">Seven layers between your attic and the next hailstorm.</h2>
-    <p class="lede">A roof is a system, not a skin of shingles. Tap a layer to see what it's doing up there.</p>
-  </div>
-  <div class="sys-body">
-    <div class="sys-fig">
-      <img src="assets/img/layers.webp" alt="Exploded view of a roof system: deck, ice and water shield, synthetic underlayment, drip edge, starter course, architectural shingles and ridge vent" width="1100" height="1366" loading="lazy">
-      <button class="pin" style="--y:13%" data-l="7" aria-label="Ridge vent and cap"><i></i></button>
-      <button class="pin" style="--y:28%" data-l="6" aria-label="Architectural shingles"><i></i></button>
-      <button class="pin" style="--y:39%" data-l="5" aria-label="Starter course"><i></i></button>
-      <button class="pin" style="--y:46%" data-l="4" aria-label="Drip edge"><i></i></button>
-      <button class="pin" style="--y:56%" data-l="3" aria-label="Synthetic underlayment"><i></i></button>
-      <button class="pin" style="--y:68%" data-l="2" aria-label="Ice and water shield"><i></i></button>
-      <button class="pin" style="--y:79%" data-l="1" aria-label="Roof deck"><i></i></button>
-    </div>
-    <ol class="sys-list">
-      <li data-l="7"><h3>Ridge vent &amp; cap</h3><p>Lets attic heat out along the peak. In a Texas August, that's what keeps shingles from cooking from underneath.</p></li>
-      <li data-l="6"><h3>Architectural shingles</h3><p>Laminated, heavier and thicker than 3-tab. IKO and TAMKO, installed by a crew certified by both.</p></li>
-      <li data-l="5"><h3>Starter course</h3><p>A sealed first row at the eaves and rakes. It's where wind tries to lift a roof first.</p></li>
-      <li data-l="4"><h3>Drip edge</h3><p>Metal flashing that turns water into the gutter instead of into your fascia and decking.</p></li>
-      <li data-l="3"><h3>Synthetic underlayment</h3><p>The water barrier under everything. If a shingle ever lets go, this is what's still keeping you dry.</p></li>
-      <li data-l="2"><h3>Ice &amp; water shield</h3><p>Self-sealing membrane in valleys and around penetrations, the places leaks start.</p></li>
-      <li data-l="1"><h3>Roof deck</h3><p>The plywood everything is nailed to. We see it bare on every tear-off, so soft spots don't get buried.</p></li>
-    </ol>
-  </div>
-</section>
-
-<!-- ============ PROOF: found / fixed ============ -->
-<section class="proof" id="proof">
-  <div class="proof-head">
-    <p class="eyebrow">Our work, not stock photos</p>
-    <h2 class="h-xl">Every circle is a hit we documented.</h2>
-    <p class="lede">This is what a Summit inspection looks like: chalk on every hail strike, photos of every one, in writing. Then the fix, from the same job.</p>
-  </div>
-
-  <div class="hits">
-    <figure class="hit hit-a"><img src="assets/img/shingle-texture.webp" alt="Hail strikes circled in chalk on a gray shingle roof" loading="lazy"><figcaption>Hail strikes, circled and photographed</figcaption></figure>
-    <figure class="hit hit-b"><img src="assets/img/before-3.webp" alt="Hail damage marked on a red shingle roof near a turbine vent" loading="lazy"><figcaption>Marked for the adjuster</figcaption></figure>
-    <figure class="hit hit-c"><img src="assets/img/before-1.webp" alt="Hail-dented pipe boot and marked shingles" loading="lazy"><figcaption>Dented pipe boots</figcaption></figure>
-  </div>
-
-  <div class="pairs">
-    <article class="pair">
-      <div class="pair-imgs">
-        <figure><img src="assets/img/before-6.webp" alt="Pipe boot flashing dented by hail" loading="lazy"><figcaption>Found</figcaption></figure>
-        <figure><img src="assets/img/after-6.webp" alt="New pipe boot flashing installed" loading="lazy"><figcaption>Fixed</figcaption></figure>
-      </div>
-      <h3>Hail-damaged pipe boots replaced</h3>
-    </article>
-    <article class="pair">
-      <div class="pair-imgs">
-        <figure><img src="assets/img/before-9.webp" alt="Storm-damaged eave and soffit on a brick home" loading="lazy"><figcaption>Found</figcaption></figure>
-        <figure><img src="assets/img/after-9.webp" alt="Rebuilt eave and soffit" loading="lazy"><figcaption>Fixed</figcaption></figure>
-      </div>
-      <h3>Storm-damaged eave and soffit rebuilt</h3>
-    </article>
-    <article class="pair">
-      <div class="pair-imgs">
-        <figure><img src="assets/img/before-7.webp" alt="Storm-damaged exterior wall and fascia on a log-sided home" loading="lazy"><figcaption>Found</figcaption></figure>
-        <figure><img src="assets/img/after-7.webp" alt="Rebuilt exterior after storm damage" loading="lazy"><figcaption>Fixed</figcaption></figure>
-      </div>
-      <h3>Storm-damaged exterior rebuilt</h3>
-    </article>
-  </div>
-</section>
-
-<!-- ============ FIELD WALL ============ -->
-<section class="field" aria-label="Summit crews on the job">
-  <div class="field-wall">
-    <figure class="fw fw-1"><img src="assets/img/hero-main.webp" alt="Summit crew in orange shirts replacing a steep shingle roof" loading="lazy"></figure>
-    <figure class="fw fw-2"><img src="assets/img/drone-1.webp" alt="Drone view of synthetic underlayment going down on a roof" loading="lazy"></figure>
-    <figure class="fw fw-3"><img src="assets/img/install-1.webp" alt="Crew on a two-story brick home mid-install" loading="lazy"></figure>
-    <figure class="fw fw-4"><img src="assets/img/scene-12.webp" alt="Finished standing seam metal roof on a stone home at dusk" loading="lazy"></figure>
-    <figure class="fw fw-5"><img src="assets/img/scene-6.webp" alt="Aerial of a finished shingle roof on a large home" loading="lazy"></figure>
-    <figure class="fw fw-6"><img src="assets/img/commercial-metal.webp" alt="Commercial standing seam metal roof" loading="lazy"></figure>
-    <div class="field-say">
-    <p class="h-xxl">Real crews.<br>Real roofs.<br><em>All Summit.</em></p>
-  </div>
-    <figure class="fw fw-7"><img src="assets/img/after-4.webp" alt="Drone view over a finished roof in a subdivision" loading="lazy"></figure>
-  </div>
-
-</section>
-
 <!-- ============ SERVICES ============ -->
 <section class="services" id="services">
   <div class="svc-head">
@@ -235,7 +288,7 @@
   <div class="svc">
     <ul class="svc-list" role="list">
       <li class="is-on" data-img="assets/img/install-2.webp"><a href="#book"><span class="svc-n">Roof replacement</span><span class="svc-d">Full tear-off to the deck and a new architectural shingle or metal system.</span></a></li>
-      <li data-img="assets/img/shingle-texture.webp"><a href="#book"><span class="svc-n">Storm &amp; hail restoration</span><span class="svc-d">Emergency tarping, documented damage and insurance claim support start to finish.</span></a></li>
+      <li data-img="assets/img/hail-slope.webp"><a href="#book"><span class="svc-n">Storm &amp; hail restoration</span><span class="svc-d">Emergency tarping, documented damage and insurance claim support start to finish.</span></a></li>
       <li data-img="assets/img/commercial-metal.webp"><a href="#book"><span class="svc-n">Commercial roofing</span><span class="svc-d">Flat-roof repairs through full standing seam metal installs for businesses.</span></a></li>
       <li data-img="assets/img/after-1.webp"><a href="#book"><span class="svc-n">Roof repair</span><span class="svc-d">Leaks, missing shingles, flashing and pipe boots, fixed without selling you a roof.</span></a></li>
       <li data-img="assets/img/drone-3.webp"><a href="#book"><span class="svc-n">Roof inspections</span><span class="svc-d">Free, top to bottom, every issue photographed and written up.</span></a></li>
@@ -247,7 +300,7 @@
 </section>
 
 <!-- ============ REVIEWS ============ -->
-<section class="reviews" id="reviews">
+<section class="reviews peaked peaked-light" id="reviews">
   <div class="rev-head">
     <p class="eyebrow eyebrow-dark">Homeowners, on camera</p>
     <h2 class="h-xl">Don't take our word for it. Take theirs.</h2>
@@ -284,8 +337,8 @@
 </section>
 
 <!-- ============ BOOK ============ -->
-<section class="book" id="book">
-  <div class="book-bg" aria-hidden="true"><img src="assets/img/frame-final.webp" alt="" loading="lazy"></div>
+<section class="book peaked" id="book">
+  <div class="book-bg" aria-hidden="true"><img src="assets/img/still-4-d.webp" alt="" loading="lazy"></div>
   <div class="book-copy">
     <p class="eyebrow">Free inspection</p>
     <h2 class="h-xl">Get a crew on your roof.</h2>
@@ -294,6 +347,7 @@
     <p class="book-hours">Mon–Fri 7am–6pm · Sat 9am–6pm CST</p>
   </div>
   <form class="book-form" id="bookForm" novalidate>
+    <svg class="form-mark" viewBox="0 0 192 93" aria-hidden="true"><use href="#mk-roof"/><use href="#mk-peak" class="pk"/></svg>
     <label class="f f-wide"><span>Property address</span><input name="address" autocomplete="street-address" placeholder="Street, city, ZIP" required></label>
     <fieldset class="f f-wide">
       <legend>What happened?</legend>
@@ -328,15 +382,15 @@
 </main>
 
 <footer class="foot">
-  <div class="foot-top">
-    <img src="assets/img/logo-white-v2.webp" alt="Summit Solutions Roofing and Construction" width="317" height="202" loading="lazy">
-    <p class="foot-big">Built for the storms<br>that come every year.</p>
-  </div>
   <div class="foot-cols">
     <div><h4>Call</h4><a href="tel:+19723333365">(972) 333-3365</a><a href="mailto:Jason@roofsbysummit.com">Jason@roofsbysummit.com</a></div>
     <div><h4>Offices</h4><p>The Colony · Austin · Midland</p><p>4695 N Colony Blvd #103<br>The Colony, TX 75056</p></div>
     <div><h4>Serving</h4><p>Texas, Oklahoma &amp; South Florida</p><p>Dallas · Houston · Austin · Midland</p></div>
     <div><h4>Follow</h4><a href="https://www.instagram.com/summitsolutionsroofing/" rel="noopener" target="_blank">Instagram</a><a href="https://www.facebook.com/p/Summit-Solutions-Roofing-and-Construction-61570251305110/" rel="noopener" target="_blank">Facebook</a></div>
+  </div>
+  <div class="foot-word" aria-hidden="true">
+    <svg viewBox="0 0 192 93"><use href="#mk-roof"/><use href="#mk-peak" class="pk"/></svg>
+    <span>SUMMIT</span>
   </div>
   <p class="foot-legal">© 2026 Summit Solutions Roofing &amp; Construction. Licensed &amp; insured · BBB accredited · RSRA certified. Concept redesign for review.</p>
 </footer>
@@ -348,7 +402,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
-<script src="assets/app.js?v=a00fd1b8"></script>
+<script src="assets/app.js?v=eae9238c"></script>
 <div id="demoToast" role="status" style="position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#14283f;color:#f1f5fa;border:1px solid #4a90e2;padding:12px 18px;border-radius:4px;font:600 15px/1.3 Archivo,sans-serif;z-index:99;opacity:0;transition:opacity .2s;pointer-events:none">Concept preview: calls and email are turned off.</div>
 <script>document.addEventListener('click',e=>{const a=e.target.closest('a[href^="tel:"],a[href^="mailto:"]');if(!a)return;e.preventDefault();const t=document.getElementById('demoToast');t.style.opacity=1;clearTimeout(t._h);t._h=setTimeout(()=>t.style.opacity=0,2200)});</script>
 </body>
