@@ -1723,3 +1723,35 @@ h1,.h2,.chap h2,.end-phone{letter-spacing:-.012em!important;line-height:1!import
 .crs.on .crs-q b{color:#fff}
 .crs.on .crs-q i{box-shadow:inset 0 0 0 1.5px var(--hot);color:var(--hot-2)}
 .crs.on .crs-a p{color:rgba(255,255,255,.86)}
+
+/* ===== v13: hero signage treatment ===== */
+.sign13{margin-bottom:44px}
+.sg-box{display:inline-block;border:3px solid #fff;padding:clamp(16px,1.6vw,24px) clamp(20px,2vw,30px) clamp(18px,1.8vw,24px)}
+.sign13 h1{font:800 clamp(56px,6.6vw,100px)/.86 var(--head)!important;font-variation-settings:"wdth" 75!important;text-transform:uppercase!important;letter-spacing:.005em!important;color:#fff}
+.sign13 h1 span{display:block}
+.sg-rule{display:block;height:3px;background:#fff;margin:clamp(12px,1.4vw,18px) 0 clamp(10px,1.2vw,16px)}
+.sg-num{display:block;font:800 clamp(38px,4vw,60px)/1 var(--head);font-variation-settings:"wdth" 80;letter-spacing:.01em;color:#fff;text-decoration:none}
+.sg-num b{color:var(--hot);font-weight:800}
+.sg-num:hover b{color:var(--hot-2)}
+.sg-list{display:flex;flex-wrap:wrap;list-style:none;padding:0;margin:12px 0 0;font:600 14px/1 var(--body);text-transform:uppercase;letter-spacing:.12em}
+.sg-list li+li{margin-left:14px;padding-left:14px;border-left:2px solid rgba(255,255,255,.5)}
+.sg-lede{margin-top:20px;font-size:18px;line-height:1.5;color:rgba(255,255,255,.84);max-width:44ch}
+.film-copy{width:min(700px,calc(100vw - 2*var(--gut) - 470px))}
+/* chapters: same signage voice, no box */
+.chap h2{font:800 clamp(48px,5.4vw,84px)/.88 var(--head)!important;font-variation-settings:"wdth" 75!important;text-transform:uppercase!important;letter-spacing:.005em!important;max-width:12ch}
+.chap .kicker{font:600 13px/1 var(--body)!important;letter-spacing:.12em!important;color:#fff!important}
+.chap-n{background:transparent;color:var(--hot);padding:0;border-radius:0;font:800 15px/1 var(--head);font-variation-settings:"wdth" 80}
+.chap-n i{color:rgba(255,255,255,.5)}
+@media (max-width:760px){
+  .sign13{margin-bottom:22px}
+  .sign13 h1{font-size:clamp(40px,12vw,54px)!important}
+  .sg-box{border-width:2px;padding:14px 16px 16px}
+  .sg-rule{height:2px}
+  .sg-num{font-size:clamp(30px,9vw,40px)}
+  .sg-list{font-size:11.5px;letter-spacing:.08em;row-gap:8px}
+  .sg-list li+li{margin-left:10px;padding-left:10px}
+  .sg-lede{font-size:15.5px;margin-top:14px}
+  .chap h2{font-size:clamp(40px,11vw,52px)!important}
+  .film-copy{width:auto}
+}
+@media (max-width:760px){.sg-list{gap:8px 16px}.sg-list li+li{margin-left:0;padding-left:0;border-left:0}}
