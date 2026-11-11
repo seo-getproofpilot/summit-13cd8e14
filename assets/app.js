@@ -47,7 +47,7 @@
     return out;
   }
   const vid = $('.film-vid'), fIntro = $('.film-intro'), chaps = $$('.chap'), rail = $('.film-rail'), railSpans = $$('.film-rail span');
-  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=9d187df8`;
+  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=5ecaba81`;
   let ready = false, shown = 0, seeking = false, lastBeat = 99;
   vid.addEventListener('loadeddata', () => { ready = true; vid.classList.add('ready'); });
   vid.addEventListener('seeked', () => { seeking = false; });

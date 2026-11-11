@@ -742,3 +742,5 @@ body.is-intro .hero-form{transform:translate(20px,-44%)}
   .crew-row::-webkit-scrollbar{display:none}
   .cw{flex:0 0 62%;scroll-snap-align:center;margin-top:0!important}
 }
+
+.reel-copy .kicker{color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.6)}
