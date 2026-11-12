@@ -48,7 +48,7 @@
   }
   const filmStage = $('.film-stage');
   const vid = $('.film-vid'), fIntro = $('.film-intro'), chaps = $$('.chap'), rail = $('.film-rail'), railSpans = $$('.film-rail span');
-  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=aff7cc7e`;
+  vid.src = `assets/video/${small ? 'film-m' : 'film-d'}.mp4?v=eb2a3e4f`;
   let ready = false, shown = 0, seeking = false, lastBeat = 99;
   vid.addEventListener('loadeddata', () => { ready = true; vid.classList.add('ready'); });
   vid.addEventListener('seeked', () => { seeking = false; });
@@ -172,7 +172,7 @@
   const runInsp = () => {
     if (inspRan) return; inspRan = true;
     const els = $$('ellipse', chalk), step = reduce ? 0 : 140;
-    els.forEach((e, i) => setTimeout(() => { e.classList.add('drawn'); countEl.textContent = i + 1; }, 250 + i * step));
+    els.forEach((e, i) => setTimeout(() => { e.classList.add('drawn'); if (countEl) countEl.textContent = i + 1; }, 250 + i * step));
     isteps.forEach((li, i) => setTimeout(() => li.classList.add('ok'), 300 + i * (reduce ? 0 : 520)));
   };
   new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); runInsp(); } }, { threshold: .4 }).observe($('.insp-photo'));
